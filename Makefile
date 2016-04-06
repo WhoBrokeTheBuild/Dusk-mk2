@@ -10,9 +10,9 @@ SRC = $(shell find $(SRC_DIR) -type f -name '*.cpp')
 OBJ = $(patsubst $(SRC_DIR)%.cpp,$(OBJ_DIR)%.o,$(SRC))
 OUT = $(OUT_DIR)libDusk.so
 
-CPPFLAGS += $(LUA_CPPFLAGS) $(ASIO_CPPFLAGS) -I $(DUSK_INC_DIR) -I $(SRC_DIR)
-LDFLAGS  += $(LUA_LDFLAGS)  $(ASIO_LDFLAGS)  -L $(DUSK_LIB_DIR)
-LDLIBS   += $(LUA_LDLIBS)   $(ASIO_LDLIBS)
+CPPFLAGS += $(SFML_CPPFLAGS) $(LUA_CPPFLAGS) $(ASIO_CPPFLAGS) -I $(DUSK_INC_DIR) -I $(SRC_DIR)
+LDFLAGS  += $(SFML_LDFLAGS)  $(LUA_LDFLAGS)  $(ASIO_LDFLAGS)  -L $(DUSK_LIB_DIR)
+LDLIBS   += $(SFML_LDLIBS)   $(LUA_LDLIBS)   $(ASIO_LDLIBS) -l X11
 
 all: $(OUT) includes
 

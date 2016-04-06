@@ -442,7 +442,7 @@ bool UIManager::ParseElement(rapidxml::xml_node<>* node, shared_ptr<UIElement>& 
         {
             const string& relPointVal = relPointAttr->value();
 
-            UIRelPoint relPoint;
+            UIRelPoint relPoint = UIRelPoint::Invalid;
             if (relPointVal == "TopLeft")
             {
                 relPoint = UIRelPoint::TopLeft;

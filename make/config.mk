@@ -27,6 +27,6 @@ ASIO_LDLIBS   += -l pthread
 
 DUSK_CPPFLAGS += $(ASIO_CPPFLAGS) $(LUA_CPPFLAGS) $(SFML_CPPFLAGS) -I $(DUSK_DIR)src
 DUSK_LDFLAGS  += $(ASIO_LDFLAGS)  $(LUA_LDFLAGS)  $(SFML_LDFLAGS)  -L $(DUSK_OUT_DIR)
-DUSK_LDLIBS   += $(ASIO_LDLIBS)   $(LUA_LDLIBS)   $(SFML_LDLIBS)   -l Dusk
+DUSK_LDLIBS   += $(ASIO_LDLIBS)   $(LUA_LDLIBS)   $(SFML_LDLIBS)   -l Dusk -l X11
 
-CPPFLAGS += -std=c++11 -Wall -Wpedantic
+CPPFLAGS += -g -std=c++11 -Wall -Wpedantic

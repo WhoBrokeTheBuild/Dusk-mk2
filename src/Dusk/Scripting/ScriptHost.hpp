@@ -22,6 +22,7 @@ public:
     virtual inline string GetClassName() const override { return "Script Host"; }
 
     bool RunFile(const string& filename);
+    bool RunString(const string& code);
     bool RegisterFunction(const string& funcName, LuaCallback callback);
 
     inline lua_State* GetState() { return mp_LuaState; }

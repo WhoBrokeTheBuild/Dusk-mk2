@@ -56,9 +56,9 @@ public:
     InputSystem* GetInputSystem() const;
     //AudioSystem* GetAudioSystem() const;
 
-protected:
-
     ScriptHost* GetScriptHost();
+
+protected:
 
     virtual void Update(FrameTimeInfo& timeInfo);
     virtual void PreRender(GraphicsContext* ctx);

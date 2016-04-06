@@ -69,4 +69,22 @@ error:
     return false;
 }
 
+bool ScriptHost::RunString(const string& code)
+{
+    int status = luaL_dostring(mp_LuaState, code.c_str());
+
+    if (status)
+        goto error;
+
+    status = lua_pcall(mp_LuaState, 0, LUA_MULTRET, 0);
+
+    return true;
+
+error:
+
+    DuskExtLog("error", "%s", lua_tostring(mp_LuaState, -1)); // get error message from stack
+    lua_pop(mp_LuaState, 1); // remove error message
+    return false;
+}
+
 } // namespace dusk
