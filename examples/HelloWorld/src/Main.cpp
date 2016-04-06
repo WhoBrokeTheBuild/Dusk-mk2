@@ -1,9 +1,7 @@
 
-#include <Dusk/Platform.hpp>
+#include <Dusk/Program.hpp>
+#include <Dusk/Main.hpp>
 
 int main(int argc, char** argv) {
-
-    
-
-    return 0;
+    return dusk::DuskMain<dusk::Program>(argc, argv);
 }

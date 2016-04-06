@@ -73,7 +73,7 @@ public:
 
     virtual int PushDataToLua(lua_State* L) const;
 
-    virtual inline string GetClassName() const
+    virtual inline string GetClassName() const override
     {
         return "Event";
     }
