@@ -29,14 +29,11 @@ protected:
     std::thread m_Thread;
 };
 
-TEST_F(WindowTest, Size) {
-    //GraphicsSystem* pGS = Program::Inst()->GetGraphicsSystem();
+TEST_F(WindowTest, Script_SetWindowTitle) {
+    Program* pProg = Program::Inst();
+    pProg->GetScriptHost()->RunString(
+        "dusk_graphics_system_set_window_title('Test')"
+    );
 
-    //pGS->SetWindowWidth(400);
-    //pGS->ApplyWindowChanges();
-    //ASSERT_EQ(400, pGS->GetWindowWidth());
-
-    //pGS->SetWindowHeight(400);
-    //pGS->ApplyWindowChanges();
-    //ASSERT_EQ(400, pGS->GetWindowHeight());
+    ASSERT_EQ("Test", pProg->GetGraphicsSystem()->GetWindowTitle());
 }

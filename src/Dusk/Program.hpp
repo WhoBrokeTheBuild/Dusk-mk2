@@ -52,6 +52,9 @@ public:
 
     void SetTargetFPS(double fps);
 
+    inline bool IsHeadless() const { return m_Headless; }
+    inline void SetHeadless(const bool& headless) { m_Headless = headless; }
+
     GraphicsSystem* GetGraphicsSystem() const;
     InputSystem* GetInputSystem() const;
     //AudioSystem* GetAudioSystem() const;
@@ -70,6 +73,7 @@ private:
     static Program* sp_Inst;
 
     bool m_Running;
+    bool m_Headless = false;
 
     double m_TargetFPS;
     double m_CurrentFPS;

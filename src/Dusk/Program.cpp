@@ -37,15 +37,12 @@ Program::Program() :
     delete sp_Inst;
     sp_Inst = this;
 
-    mp_GraphicsSystem->CreateWindow();
-
     Script_RegisterFunctions();
+    mp_ScriptHost.reset(New ScriptHost);
 
     SetTargetFPS(60.0);
 
-    mp_ScriptHost.reset(New ScriptHost);
-
-    DuskBenchEnd("Program::Init");
+    DuskBenchEnd("Program::ctor");
 }
 
 Program::~Program()
@@ -56,6 +53,11 @@ Program::~Program()
 Program* Program::Run(int argc, char* argv[])
 {
     DuskLog("verbose", "Program running");
+
+    if ( ! IsHeadless())
+    {
+        mp_GraphicsSystem->CreateWindow();
+    }
 
     FrameTimeInfo timeInfo;
     unsigned long long frameCount = 0;
@@ -87,10 +89,13 @@ Program* Program::Run(int argc, char* argv[])
 
         if (secsSinceLastFrame >= m_UpdateInterval)
         {
-            GraphicsContext* ctx = GetGraphicsSystem()->GetContext();
-            PreRender(ctx);
-            Render(ctx);
-            PostRender(ctx);
+            if ( ! IsHeadless())
+            {
+                GraphicsContext* ctx = GetGraphicsSystem()->GetContext();
+                PreRender(ctx);
+                Render(ctx);
+                PostRender(ctx);
+            }
 
             ++frameCount;
             m_CurrentFPS = (m_UpdateInterval / secsSinceLastFrame) * m_TargetFPS;
