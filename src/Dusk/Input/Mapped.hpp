@@ -8,26 +8,27 @@ namespace dusk
 
 typedef string MappedInputID;
 
-class MappedInputEventData :
-    public EventData
+class MappedInputEventData : public EventData
 {
 public:
-
-    MappedInputEventData(const MappedInputID& mappedInput) :
-        m_MappedInput(mappedInput)
-    { }
+    MappedInputEventData(const MappedInputID& mappedInput)
+        : m_MappedInput(mappedInput)
+    {
+    }
 
     virtual inline string GetClassName() const override { return "Mapped Input Event Data"; }
 
-    virtual inline EventData* Clone() const override { return New MappedInputEventData(m_MappedInput); }
+    virtual inline EventData* Clone() const override
+    {
+        return New MappedInputEventData(m_MappedInput);
+    }
 
     inline MappedInputID GetMappedInput() const { return m_MappedInput; }
 
     virtual int PushDataToLua(lua_State* L) const override;
 
 private:
-
-    MappedInputID        m_MappedInput;
+    MappedInputID m_MappedInput;
 
 }; // class MappedInputEventData
 

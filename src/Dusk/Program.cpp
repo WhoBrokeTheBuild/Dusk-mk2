@@ -22,14 +22,14 @@ EventID Program::EvtUpdate = 1;
 EventID Program::EvtRender = 2;
 EventID Program::EvtExit = 3;
 
-Program::Program() :
-    m_Running(),
-    m_TargetFPS(),
-    m_CurrentFPS(),
-    m_UpdateInterval(),
-    mp_GraphicsSystem(New GraphicsSystem),
-    mp_InputSystem(New InputSystem),
-    mp_ScriptHost(nullptr)
+Program::Program()
+    : m_Running()
+    , m_TargetFPS()
+    , m_CurrentFPS()
+    , m_UpdateInterval()
+    , mp_GraphicsSystem(New GraphicsSystem)
+    , mp_InputSystem(New InputSystem)
+    , mp_ScriptHost(nullptr)
 {
     DuskLog("verbose", "Program initializing");
     DuskBenchStart();
@@ -45,16 +45,14 @@ Program::Program() :
     DuskBenchEnd("Program::ctor");
 }
 
-Program::~Program()
-{
-    sp_Inst = nullptr;
-}
+Program::~Program() { sp_Inst = nullptr; }
 
-Program* Program::Run(int argc, char* argv[])
+Program*
+Program::Run(int argc, char* argv[])
 {
     DuskLog("verbose", "Program running");
 
-    if ( ! IsHeadless())
+    if (!IsHeadless())
     {
         mp_GraphicsSystem->CreateWindow();
     }
@@ -77,7 +75,8 @@ Program* Program::Run(int argc, char* argv[])
         timeInfo.CurrentFPS = m_CurrentFPS;
         timeInfo.TargetFPS = m_TargetFPS;
         timeInfo.ElapsedSeconds = duration_cast<duration<double>>(elapsedTime).count();
-        timeInfo.ElapsedMilliseconds = duration_cast<duration<double, std::milli>>(elapsedTime).count();
+        timeInfo.ElapsedMilliseconds
+            = duration_cast<duration<double, std::milli>>(elapsedTime).count();
         timeInfo.TotalSeconds += timeInfo.ElapsedSeconds;
         timeInfo.TotalMilliseconds += timeInfo.ElapsedMilliseconds;
 
@@ -89,7 +88,7 @@ Program* Program::Run(int argc, char* argv[])
 
         if (secsSinceLastFrame >= m_UpdateInterval)
         {
-            if ( ! IsHeadless())
+            if (!IsHeadless())
             {
                 GraphicsContext* ctx = GetGraphicsSystem()->GetContext();
                 PreRender(ctx);
@@ -110,48 +109,57 @@ Program* Program::Run(int argc, char* argv[])
     return sp_Inst;
 }
 
-void Program::SetTargetFPS(double fps)
+void
+Program::SetTargetFPS(double fps)
 {
     m_TargetFPS = fps;
     m_UpdateInterval = (1.0 / m_TargetFPS);
 }
 
-GraphicsSystem* Program::GetGraphicsSystem() const
+GraphicsSystem*
+Program::GetGraphicsSystem() const
 {
     return mp_GraphicsSystem.get();
 }
 
-InputSystem* Program::GetInputSystem() const
+InputSystem*
+Program::GetInputSystem() const
 {
     return mp_InputSystem.get();
 }
 
-ScriptHost* Program::GetScriptHost()
+ScriptHost*
+Program::GetScriptHost()
 {
     return mp_ScriptHost.get();
 }
 
-void Program::Update(FrameTimeInfo& timeInfo)
+void
+Program::Update(FrameTimeInfo& timeInfo)
 {
     Dispatch(Event(EvtUpdate, UpdateEventData(&timeInfo)));
 }
 
-void Program::PreRender(GraphicsContext* pCtx)
+void
+Program::PreRender(GraphicsContext* pCtx)
 {
     pCtx->Clear();
 }
 
-void Program::Render(GraphicsContext* pCtx)
+void
+Program::Render(GraphicsContext* pCtx)
 {
     Dispatch(Event(EvtRender, RenderEventData(pCtx)));
 }
 
-void Program::PostRender(GraphicsContext* pCtx)
+void
+Program::PostRender(GraphicsContext* pCtx)
 {
     pCtx->SwapBuffers();
 }
 
-void Program::Script_RegisterFunctions()
+void
+Program::Script_RegisterFunctions()
 {
     Scripting::RegisterFunction("dusk_get_program", &Program::Script_Get);
     Scripting::RegisterFunction("dusk_program_exit", &Program::Script_Exit);
@@ -162,25 +170,29 @@ void Program::Script_RegisterFunctions()
     UIManager::Script_RegisterFunctions();
 }
 
-int Program::Script_Get(lua_State* L)
+int
+Program::Script_Get(lua_State* L)
 {
     lua_pushinteger(L, (ptrdiff_t)Program::Inst());
     return 1;
 }
 
-int dusk::Program::Script_Exit(lua_State* L)
+int
+dusk::Program::Script_Exit(lua_State* L)
 {
     Program* pProgram = (Program*)lua_tointeger(L, 1);
     pProgram->Exit();
     return 0;
 }
 
-FrameTimeInfo* UpdateEventData::GetTimeInfo()
+FrameTimeInfo*
+UpdateEventData::GetTimeInfo()
 {
     return mp_TimeInfo;
 }
 
-int UpdateEventData::PushDataToLua(lua_State* L) const
+int
+UpdateEventData::PushDataToLua(lua_State* L) const
 {
     lua_newtable(L);
 
@@ -208,12 +220,14 @@ int UpdateEventData::PushDataToLua(lua_State* L) const
     return 1;
 }
 
-int RenderEventData::PushDataToLua(lua_State* L) const
+int
+RenderEventData::PushDataToLua(lua_State* L) const
 {
     return 0;
 }
 
-GraphicsContext* RenderEventData::GetContext()
+GraphicsContext*
+RenderEventData::GetContext()
 {
     return mp_Context;
 }

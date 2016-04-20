@@ -14,7 +14,8 @@
 namespace dusk
 {
 
-bool GraphicsSystem::CreateWindow()
+bool
+GraphicsSystem::CreateWindow()
 {
     DuskBenchStart();
 
@@ -27,7 +28,8 @@ bool GraphicsSystem::CreateWindow()
     return true;
 }
 
-void GraphicsSystem::OnUpdate(const Event& event)
+void
+GraphicsSystem::OnUpdate(const Event& event)
 {
     InputSystem* pIS = Program::Inst()->GetInputSystem();
 
@@ -53,65 +55,77 @@ void GraphicsSystem::OnUpdate(const Event& event)
     }
 }
 
-Vector2u GraphicsSystem::GetWindowSize() const
+Vector2u
+GraphicsSystem::GetWindowSize() const
 {
     return m_SfWindow.getSize();
 }
 
-void GraphicsSystem::SetWindowWidth(const unsigned int& width)
+void
+GraphicsSystem::SetWindowWidth(const unsigned int& width)
 {
     m_Width = width;
 }
 
-void GraphicsSystem::SetWindowHeight(const unsigned int& height)
+void
+GraphicsSystem::SetWindowHeight(const unsigned int& height)
 {
     m_Height = height;
 }
 
-void GraphicsSystem::SetWindowSize(const unsigned int& width, const unsigned int& height)
+void
+GraphicsSystem::SetWindowSize(const unsigned int& width, const unsigned int& height)
 {
     m_Width = width;
     m_Height = height;
 }
 
-void GraphicsSystem::SetWindowStyle(const int& styleFlags)
+void
+GraphicsSystem::SetWindowStyle(const int& styleFlags)
 {
     m_Style = styleFlags;
 }
 
-void GraphicsSystem::ApplyWindowChanges()
+void
+GraphicsSystem::ApplyWindowChanges()
 {
     CreateSFMLWindow();
     Dispatch(Event(EvtWindowResize, WindowResizeEventData(m_Width, m_Height)));
 }
 
-void GraphicsSystem::SetWindowTitle(const string& title)
+void
+GraphicsSystem::SetWindowTitle(const string& title)
 {
     m_Title = title;
     m_SfWindow.setTitle(title);
 }
 
-bool GraphicsSystem::IsFullscreen() const
+bool
+GraphicsSystem::IsFullscreen() const
 {
     return (m_Style & WindowStyle::Fullscreen) > 0;
 }
 
-bool GraphicsSystem::IsDecorated() const
+bool
+GraphicsSystem::IsDecorated() const
 {
     return (m_Style & WindowStyle::Decorated) > 0;
 }
 
-bool GraphicsSystem::IsResizable() const
+bool
+GraphicsSystem::IsResizable() const
 {
     return (m_Style & WindowStyle::Resizable) > 0;
 }
 
-GraphicsContext* GraphicsSystem::GetContext() const
+GraphicsContext*
+GraphicsSystem::GetContext() const
 {
     return mp_GraphicsContext.get();
 }
 
-bool GraphicsSystem::CreateSFMLWindow()
+bool
+GraphicsSystem::CreateSFMLWindow()
 {
     uint32_t style = 0;
 
@@ -137,32 +151,40 @@ bool GraphicsSystem::CreateSFMLWindow()
     return m_SfWindow.isOpen();
 }
 
-void GraphicsSystem::Script_RegisterFunctions()
+void
+GraphicsSystem::Script_RegisterFunctions()
 {
     Scripting::RegisterFunction("dusk_get_graphics_system", &GraphicsSystem::Script_Get);
-    Scripting::RegisterFunction("dusk_graphics_system_get_context", &GraphicsSystem::Script_GetContext);
-    Scripting::RegisterFunction("dusk_graphics_system_get_window_size", &GraphicsSystem::Script_GetWindowSize);
-    Scripting::RegisterFunction("dusk_graphics_system_get_window_title", &GraphicsSystem::Script_GetWindowTitle);
-    Scripting::RegisterFunction("dusk_graphics_system_set_window_title", &GraphicsSystem::Script_SetWindowTitle);
+    Scripting::RegisterFunction(
+        "dusk_graphics_system_get_context", &GraphicsSystem::Script_GetContext);
+    Scripting::RegisterFunction(
+        "dusk_graphics_system_get_window_size", &GraphicsSystem::Script_GetWindowSize);
+    Scripting::RegisterFunction(
+        "dusk_graphics_system_get_window_title", &GraphicsSystem::Script_GetWindowTitle);
+    Scripting::RegisterFunction(
+        "dusk_graphics_system_set_window_title", &GraphicsSystem::Script_SetWindowTitle);
 
     GraphicsContext::Script_RegisterFunctions();
     Texture::Script_RegisterFunctions();
     Sprite::Script_RegisterFunctions();
 }
 
-int GraphicsSystem::Script_Get(lua_State* L)
+int
+GraphicsSystem::Script_Get(lua_State* L)
 {
     lua_pushinteger(L, (ptrdiff_t)Program::Inst()->GetGraphicsSystem());
     return 1;
 }
 
-int GraphicsSystem::Script_GetContext(lua_State* L)
+int
+GraphicsSystem::Script_GetContext(lua_State* L)
 {
     lua_pushinteger(L, (ptrdiff_t)Program::Inst()->GetGraphicsSystem()->GetContext());
     return 1;
 }
 
-int GraphicsSystem::Script_GetWindowSize(lua_State* L)
+int
+GraphicsSystem::Script_GetWindowSize(lua_State* L)
 {
     GraphicsSystem* pGS = Program::Inst()->GetGraphicsSystem();
     Vector2u size = pGS->GetWindowSize();
@@ -171,7 +193,8 @@ int GraphicsSystem::Script_GetWindowSize(lua_State* L)
     return 2;
 }
 
-int GraphicsSystem::Script_GetWindowTitle(lua_State* L)
+int
+GraphicsSystem::Script_GetWindowTitle(lua_State* L)
 {
     GraphicsSystem* pGS = Program::Inst()->GetGraphicsSystem();
     string title = pGS->GetWindowTitle();
@@ -179,7 +202,8 @@ int GraphicsSystem::Script_GetWindowTitle(lua_State* L)
     return 1;
 }
 
-int GraphicsSystem::Script_SetWindowTitle(lua_State* L)
+int
+GraphicsSystem::Script_SetWindowTitle(lua_State* L)
 {
     GraphicsSystem* pGS = Program::Inst()->GetGraphicsSystem();
     string title = lua_tostring(L, 1);
@@ -187,7 +211,8 @@ int GraphicsSystem::Script_SetWindowTitle(lua_State* L)
     return 0;
 }
 
-int WindowResizeEventData::PushDataToLua(lua_State* L) const
+int
+WindowResizeEventData::PushDataToLua(lua_State* L) const
 {
     lua_pushinteger(L, m_Width);
     lua_pushinteger(L, m_Height);

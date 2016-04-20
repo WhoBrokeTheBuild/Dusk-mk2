@@ -10,7 +10,8 @@ namespace dusk
 {
 
 template <class ProgramType>
-int DuskMain(int argc, char* argv[])
+int
+DuskMain(int argc, char* argv[])
 {
     Logging::StartClock();
 

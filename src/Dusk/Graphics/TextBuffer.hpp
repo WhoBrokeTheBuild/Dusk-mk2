@@ -13,20 +13,19 @@ namespace dusk
 
 class Font;
 
-class TextBuffer :
-    public TrackedObject
+class TextBuffer : public TrackedObject
 {
 
     friend class GraphicsContext;
 
 public:
-
     TextBuffer() = default;
     TextBuffer(const TextBuffer&) = default;
     TextBuffer& operator=(const TextBuffer&) = default;
     virtual ~TextBuffer() = default;
 
-    TextBuffer(const Font* pFont, const string& text, const unsigned int& fontSize, const Color& color)
+    TextBuffer(
+        const Font* pFont, const string& text, const unsigned int& fontSize, const Color& color)
     {
         SetFont(pFont);
         SetText(text);
@@ -55,7 +54,6 @@ public:
     inline const sf::Text& GetSFMLText() const { return m_SfText; }
 
 private:
-
     const Font* mp_Font;
 
     string m_Text;
@@ -67,7 +65,6 @@ private:
     sf::Text m_SfText;
 
 public:
-
     static void Script_RegisterFunctions();
     static int Script_New(lua_State* L);
     static int Script_Delete(lua_State* L);

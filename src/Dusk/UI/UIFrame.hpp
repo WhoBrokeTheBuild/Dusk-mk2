@@ -6,18 +6,15 @@
 namespace dusk
 {
 
-class UIFrame :
-    public UIElement
+class UIFrame : public UIElement
 {
 public:
-
     UIFrame();
     virtual ~UIFrame();
 
     virtual inline string GetClassName() const override { return "UI Frame"; }
 
     virtual void Inherit(const UIElement* pInheritFrom) override;
-
 };
 
 } // namespace dusk

@@ -15,8 +15,8 @@ class MemoryTracker
     friend class TrackedObject;
 
 public:
-
-    static bool AddAllocation(TrackedObject* pObject, size_t size, unsigned int lineNumber, string filename);
+    static bool AddAllocation(
+        TrackedObject* pObject, size_t size, unsigned int lineNumber, string filename);
 
     static bool RemoveAllocation(TrackedObject* pObject);
 
@@ -25,11 +25,9 @@ public:
     static void PrintAllocations();
 
 private:
-
     struct AllocationRecord
     {
     public:
-
         unsigned int Number;
         unsigned int LineNumber;
         size_t Size;

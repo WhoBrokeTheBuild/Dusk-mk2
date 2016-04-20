@@ -9,17 +9,15 @@
 namespace dusk
 {
 
-class UIFont :
-    public TrackedObject
+class UIFont : public TrackedObject
 {
 public:
+    inline UIFont()
+        : mp_Font(nullptr)
+    {
+    }
 
-    inline UIFont() :
-        mp_Font(nullptr)
-    { }
-
-    virtual inline ~UIFont()
-    { }
+    virtual inline ~UIFont() {}
 
     virtual inline string GetClassName() const override { return "UI Font"; }
 
@@ -40,13 +38,11 @@ public:
     inline void SetColor(const Color& color) { m_Color = color; }
 
 private:
-
     Font* mp_Font;
 
     unsigned int m_FontSize;
 
     Color m_Color;
-
 };
 
 } // namespace dusk

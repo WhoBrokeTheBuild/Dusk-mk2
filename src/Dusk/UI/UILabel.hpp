@@ -6,11 +6,9 @@
 namespace dusk
 {
 
-class UILabel :
-    public UIElement
+class UILabel : public UIElement
 {
 public:
-
     UILabel();
     virtual ~UILabel();
 
@@ -26,7 +24,6 @@ public:
     virtual void MouseDown() override;
 
 protected:
-
     weak_ptr<UIElement> mp_Target;
 };
 

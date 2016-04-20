@@ -15,19 +15,21 @@
 namespace dusk
 {
 
-enum class UIState : short {
-    Invalid  = -1,
-    Default  = 1,
-    Active   = 2,
-    Hover    = 3,
+enum class UIState : short
+{
+    Invalid = -1,
+    Default = 1,
+    Active = 2,
+    Hover = 3,
     Disabled = 4,
 };
 
-enum class UIRelPoint : short {
-    Invalid     = -1,
-    TopLeft     = 1,
-    TopRight    = 2,
-    BottomLeft  = 3,
+enum class UIRelPoint : short
+{
+    Invalid = -1,
+    TopLeft = 1,
+    TopRight = 2,
+    BottomLeft = 3,
     BottomRight = 4,
 };
 
@@ -35,22 +37,22 @@ template <typename PropType>
 struct StateProp
 {
 public:
-
-    StateProp(PropType def) :
-        m_Values()
+    StateProp(PropType def)
+        : m_Values()
     {
         m_Values.add(UIState::Default, def);
     }
 
-    StateProp() :
-        m_Values()
+    StateProp()
+        : m_Values()
     {
         m_Values.add(UIState::Default, PropType());
     }
 
-    StateProp( const StateProp<PropType>& other ) :
-        m_Values(other.m_Values)
-    { }
+    StateProp(const StateProp<PropType>& other)
+        : m_Values(other.m_Values)
+    {
+    }
 
     PropType GetValue(const UIState& state) const
     {
@@ -66,41 +68,36 @@ public:
     }
 
 private:
-
     Map<UIState, PropType> m_Values;
-
 };
 
 class UIManager;
 
-class UIElement :
-    public TrackedObject,
-    public EventDispatcher
+class UIElement : public TrackedObject, public EventDispatcher
 {
 public:
-
     enum : EventID
     {
-        EvtShow         = 1,
-        EvtHide         = 2,
+        EvtShow = 1,
+        EvtHide = 2,
 
-        EvtActivate     = 3,
-        EvtDeactivate   = 4,
+        EvtActivate = 3,
+        EvtDeactivate = 4,
 
-        EvtMouseEnter   = 5,
-        EvtMouseLeave   = 6,
+        EvtMouseEnter = 5,
+        EvtMouseLeave = 6,
 
-        EvtMouseDown    = 7,
-        EvtMouseUp      = 8,
+        EvtMouseDown = 7,
+        EvtMouseUp = 8,
 
-        EvtFocus        = 9,
-        EvtBlur         = 10,
+        EvtFocus = 9,
+        EvtBlur = 10,
 
-        EvtUpdate       = 11,
-        EvtRender       = 12,
+        EvtUpdate = 11,
+        EvtRender = 12,
 
         EvtLayoutChange = 13,
-        EvtStateChange  = 14,
+        EvtStateChange = 14,
     };
 
     UIElement();
@@ -168,18 +165,39 @@ public:
     Vector2f GetOffset() const { return m_Offset; }
     virtual void SetOffset(const Vector2f& offset);
 
-    virtual FloatRect GetBounds() const { return{ m_Pos.x, m_Pos.y, m_Size.x, m_Size.y }; }
+    virtual FloatRect GetBounds() const { return { m_Pos.x, m_Pos.y, m_Size.x, m_Size.y }; }
 
-    virtual Color GetBackgroundColor(const UIState& state = UIState::Default) const { return m_BackgroundColor.GetValue(state); }
-    virtual void SetBackgroundColor(const Color& color, const UIState& state = UIState::Default) { m_BackgroundColor.SetValue(state, color); }
+    virtual Color GetBackgroundColor(const UIState& state = UIState::Default) const
+    {
+        return m_BackgroundColor.GetValue(state);
+    }
+    virtual void SetBackgroundColor(const Color& color, const UIState& state = UIState::Default)
+    {
+        m_BackgroundColor.SetValue(state, color);
+    }
 
-    virtual float GetBorderSize(const UIState& state = UIState::Default) const { return m_BorderSize.GetValue(state); }
-    virtual void SetBorderSize(const float& size, const UIState& state = UIState::Default) { m_BorderSize.SetValue(state, size); }
+    virtual float GetBorderSize(const UIState& state = UIState::Default) const
+    {
+        return m_BorderSize.GetValue(state);
+    }
+    virtual void SetBorderSize(const float& size, const UIState& state = UIState::Default)
+    {
+        m_BorderSize.SetValue(state, size);
+    }
 
-    virtual Color GetBorderColor(const UIState& state = UIState::Default) const { return m_BorderColor.GetValue(state); }
-    virtual void SetBorderColor(const Color& color, const UIState& state = UIState::Default) { m_BorderColor.SetValue(state, color); }
+    virtual Color GetBorderColor(const UIState& state = UIState::Default) const
+    {
+        return m_BorderColor.GetValue(state);
+    }
+    virtual void SetBorderColor(const Color& color, const UIState& state = UIState::Default)
+    {
+        m_BorderColor.SetValue(state, color);
+    }
 
-    virtual UIFont* GetFont(const UIState& state = UIState::Default) const { return m_Font.GetValue(state); }
+    virtual UIFont* GetFont(const UIState& state = UIState::Default) const
+    {
+        return m_Font.GetValue(state);
+    }
     virtual void SetFont(UIFont* pFont, const UIState& state = UIState::Default);
 
     virtual string GetText() const { return m_TextBuffer.GetText(); }
@@ -189,13 +207,11 @@ public:
     virtual void AddChild(shared_ptr<UIElement>& pChild);
 
 protected:
-
     virtual void UpdateState();
     virtual void UpdateStateData();
     virtual void UpdateLayout();
 
 private:
-
     UIManager* mp_UIManager;
 
     string m_Name;
@@ -229,7 +245,6 @@ private:
     ArrayList<shared_ptr<UIElement>> m_Children;
 
 public:
-
     static void Script_RegisterFunctions();
 
     static int Script_IsMouseOver(lua_State* L);
@@ -253,7 +268,7 @@ public:
     static int Script_GetBounds(lua_State* L);
 
     static int Script_GetParent(lua_State* L);
-    //static int Script_SetParent(lua_State* L);
+    // static int Script_SetParent(lua_State* L);
 
     static int Script_GetSize(lua_State* L);
     static int Script_SetSize(lua_State* L);
@@ -262,35 +277,27 @@ public:
     static int Script_SetOffset(lua_State* L);
 
     static int Script_GetRelativePoint(lua_State* L);
-    //static int Script_SetRelativePoint(lua_State* L);
+    // static int Script_SetRelativePoint(lua_State* L);
 
     static int Script_GetRelativeTo(lua_State* L);
     static int Script_SetRelativeTo(lua_State* L);
 
     static int Script_GetText(lua_State* L);
     static int Script_SetText(lua_State* L);
-
 };
 
-class StateChangeData :
-    public EventData
+class StateChangeData : public EventData
 {
 public:
-
-    StateChangeData(const UIState& oldState, const UIState& newState) :
-        m_OldState(oldState),
-        m_NewState(newState)
-    { }
-
-    virtual inline string GetClassName() const
+    StateChangeData(const UIState& oldState, const UIState& newState)
+        : m_OldState(oldState)
+        , m_NewState(newState)
     {
-        return "State Change Event Data";
     }
 
-    virtual inline EventData* Clone() const
-    {
-        return New StateChangeData(m_OldState, m_NewState);
-    }
+    virtual inline string GetClassName() const { return "State Change Event Data"; }
+
+    virtual inline EventData* Clone() const { return New StateChangeData(m_OldState, m_NewState); }
 
     inline UIState GetOldState() const { return m_OldState; }
     inline UIState GetNewState() const { return m_NewState; }
@@ -298,10 +305,8 @@ public:
     virtual int PushDataToLua(lua_State* L) const;
 
 private:
-
     UIState m_OldState;
     UIState m_NewState;
-
 };
 
 } // namespace dusk

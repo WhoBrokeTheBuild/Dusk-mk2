@@ -12,5 +12,4 @@ typedef sf::Vector2u Vector2u;
 
 } // namespace dusk
 
-
 #endif // DUSK_GEOMETRY_VECTOR_2_HPP

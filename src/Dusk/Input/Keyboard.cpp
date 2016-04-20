@@ -3,7 +3,8 @@
 namespace dusk
 {
 
-Keyboard::Key Keyboard::ConvertSFMLKey(sf::Keyboard::Key key)
+Keyboard::Key
+Keyboard::ConvertSFMLKey(sf::Keyboard::Key key)
 {
     for (unsigned int i = 0; i < 26; ++i)
     {
@@ -153,13 +154,15 @@ Keyboard::Key Keyboard::ConvertSFMLKey(sf::Keyboard::Key key)
     }
 }
 
-int KeyEventData::PushDataToLua(lua_State* L) const
+int
+KeyEventData::PushDataToLua(lua_State* L) const
 {
     lua_pushinteger(L, m_Key);
     return 1;
 }
 
-int TextInputEventData::PushDataToLua(lua_State* L) const
+int
+TextInputEventData::PushDataToLua(lua_State* L) const
 {
     return 0;
 }

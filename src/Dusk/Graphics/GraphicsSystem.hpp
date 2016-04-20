@@ -17,15 +17,12 @@ namespace dusk
 class Program;
 class Window;
 
-class GraphicsSystem :
-    public TrackedObject,
-    public EventDispatcher
+class GraphicsSystem : public TrackedObject, public EventDispatcher
 {
 
     friend class Program;
 
 public:
-
     enum WindowStyle : uint8_t
     {
         Fullscreen = 1,
@@ -74,10 +71,10 @@ public:
     sf::WindowHandle GetWindowHandle() const { return m_SfWindow.getSystemHandle(); }
 
 private:
-
-    GraphicsSystem() :
-        mp_GraphicsContext(nullptr)
-    { }
+    GraphicsSystem()
+        : mp_GraphicsContext(nullptr)
+    {
+    }
 
     bool CreateSFMLWindow();
 
@@ -94,7 +91,6 @@ private:
     unique_ptr<GraphicsContext> mp_GraphicsContext;
 
 public:
-
     static void Script_RegisterFunctions();
     static int Script_Get(lua_State* L);
     static int Script_GetContext(lua_State* L);
@@ -104,25 +100,18 @@ public:
 
 }; // class GraphicsSystem
 
-class WindowResizeEventData :
-    public EventData
+class WindowResizeEventData : public EventData
 {
 public:
-
-    WindowResizeEventData(const unsigned int& width, const unsigned int& height) :
-        m_Width(width),
-        m_Height(height)
-    { }
-
-    virtual inline string GetClassName() const
+    WindowResizeEventData(const unsigned int& width, const unsigned int& height)
+        : m_Width(width)
+        , m_Height(height)
     {
-        return "Window Resize Event Data";
     }
 
-    virtual inline EventData* Clone() const
-    {
-        return New WindowResizeEventData(m_Width, m_Height);
-    }
+    virtual inline string GetClassName() const { return "Window Resize Event Data"; }
+
+    virtual inline EventData* Clone() const { return New WindowResizeEventData(m_Width, m_Height); }
 
     inline unsigned int GetWidth() const { return m_Width; }
     inline unsigned int GetHeight() const { return m_Height; }
@@ -131,7 +120,6 @@ public:
     virtual int PushDataToLua(lua_State* L) const;
 
 private:
-
     unsigned int m_Width;
     unsigned int m_Height;
 

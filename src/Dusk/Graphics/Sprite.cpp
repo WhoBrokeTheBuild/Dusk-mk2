@@ -8,7 +8,8 @@
 namespace dusk
 {
 
-bool Sprite::Init(Texture* pTexture, IntRect rect /*= IntRect(0, 0, 0, 0)*/)
+bool
+Sprite::Init(Texture* pTexture, IntRect rect /*= IntRect(0, 0, 0, 0)*/)
 {
     mp_Texture = pTexture;
     m_SfSprite.setTexture(pTexture->GetSFMLTexture());
@@ -21,10 +22,13 @@ bool Sprite::Init(Texture* pTexture, IntRect rect /*= IntRect(0, 0, 0, 0)*/)
     return true;
 }
 
-void Sprite::Term()
-{ }
+void
+Sprite::Term()
+{
+}
 
-void Sprite::Script_RegisterFunctions()
+void
+Sprite::Script_RegisterFunctions()
 {
     Scripting::RegisterFunction("dusk_sprite_new", &Sprite::Script_New);
     Scripting::RegisterFunction("dusk_sprite_delete", &Sprite::Script_Delete);
@@ -32,7 +36,8 @@ void Sprite::Script_RegisterFunctions()
     Scripting::RegisterFunction("dusk_sprite_set_pos", &Sprite::Script_SetPos);
 }
 
-int Sprite::Script_New(lua_State* L)
+int
+Sprite::Script_New(lua_State* L)
 {
     Texture* pTexture = (Texture*)lua_tointeger(L, 1);
 
@@ -44,7 +49,8 @@ int Sprite::Script_New(lua_State* L)
     return 1;
 }
 
-int Sprite::Script_Delete(lua_State* L)
+int
+Sprite::Script_Delete(lua_State* L)
 {
     Sprite* pSprite = (Sprite*)lua_tointeger(L, 1);
     delete pSprite;
@@ -52,7 +58,8 @@ int Sprite::Script_Delete(lua_State* L)
     return 0;
 }
 
-int Sprite::Script_GetPos(lua_State* L)
+int
+Sprite::Script_GetPos(lua_State* L)
 {
     Sprite* pSprite = (Sprite*)lua_tointeger(L, 1);
     sf::Vector2f pos = pSprite->GetPos();
@@ -62,7 +69,8 @@ int Sprite::Script_GetPos(lua_State* L)
     return 2;
 }
 
-int Sprite::Script_SetPos(lua_State* L)
+int
+Sprite::Script_SetPos(lua_State* L)
 {
     Sprite* pSprite = (Sprite*)lua_tointeger(L, 1);
     float x = (float)lua_tonumber(L, 2);

@@ -9,12 +9,9 @@
 namespace dusk
 {
 
-class Music :
-    public TrackedObject,
-    public EventDispatcher
+class Music : public TrackedObject, public EventDispatcher
 {
 public:
-
     Music() = default;
     Music(const Music&) = delete;
     Music& operator=(const Music&) = delete;
@@ -40,13 +37,11 @@ public:
     bool IsLooping() const;
 
 private:
-
     bool m_Loaded = false;
 
     sf::Music m_SfMusic;
 
 public:
-
     static void InitScripting();
     static int Script_New(lua_State* L);
     static int Script_Delete(lua_State* L);
@@ -58,7 +53,6 @@ public:
     static int Script_IsPaused(lua_State* L);
     static int Script_IsStopped(lua_State* L);
     static int Script_IsLooping(lua_State* L);
-
 };
 
 } // namespace dusk

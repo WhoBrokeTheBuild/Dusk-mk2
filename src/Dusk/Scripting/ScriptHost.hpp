@@ -9,11 +9,9 @@
 namespace dusk
 {
 
-class ScriptHost :
-    public TrackedObject
+class ScriptHost : public TrackedObject
 {
 public:
-
     ScriptHost();
     ScriptHost(const ScriptHost&) = delete;
     ScriptHost& operator=(const ScriptHost&) = delete;
@@ -28,8 +26,7 @@ public:
     inline lua_State* GetState() { return mp_LuaState; }
 
 private:
-
-    lua_State*        mp_LuaState;
+    lua_State* mp_LuaState;
 
 }; // class ScriptHost
 

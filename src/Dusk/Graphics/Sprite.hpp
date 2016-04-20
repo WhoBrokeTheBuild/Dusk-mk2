@@ -15,51 +15,37 @@ namespace dusk
 class Texture;
 class GraphicsContext;
 
-class Sprite :
-    public TrackedObject
+class Sprite : public TrackedObject
 {
 
     friend class GraphicsContext;
 
 public:
-
-    inline Sprite() :
-        mp_Texture(nullptr),
-        m_Rect(),
-        m_SfSprite()
-    { }
-
-    virtual inline ~Sprite()
+    inline Sprite()
+        : mp_Texture(nullptr)
+        , m_Rect()
+        , m_SfSprite()
     {
-        Term();
     }
 
-    virtual inline string GetClassName() const
-    {
-        return "Sprite";
-    }
+    virtual inline ~Sprite() { Term(); }
+
+    virtual inline string GetClassName() const { return "Sprite"; }
 
     bool Init(Texture* pTexture, IntRect rect = IntRect(0, 0, 0, 0));
 
     void Term();
 
-    inline Vector2f GetPos() const
-    {
-        return m_SfSprite.getPosition();
-    }
+    inline Vector2f GetPos() const { return m_SfSprite.getPosition(); }
 
     inline void SetPos(const float& x, const float& y)
     {
         m_SfSprite.setPosition(sf::Vector2f(x, y));
     }
 
-    inline const sf::Sprite& GetSFMLSprite() const
-    {
-        return m_SfSprite;
-    }
+    inline const sf::Sprite& GetSFMLSprite() const { return m_SfSprite; }
 
 private:
-
     Texture* mp_Texture;
 
     IntRect m_Rect;
@@ -67,7 +53,6 @@ private:
     sf::Sprite m_SfSprite;
 
 public:
-
     static void Script_RegisterFunctions();
     static int Script_New(lua_State* L);
     static int Script_Delete(lua_State* L);

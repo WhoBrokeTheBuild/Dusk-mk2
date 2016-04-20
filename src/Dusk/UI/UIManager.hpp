@@ -22,11 +22,9 @@
 namespace dusk
 {
 
-class UIManager :
-    public TrackedObject
+class UIManager : public TrackedObject
 {
 public:
-
     UIManager();
     UIManager(const UIManager&) = delete;
     UIManager& operator=(const UIManager&) = delete;
@@ -48,7 +46,7 @@ public:
 
     bool LoadFile(const string& filename);
 
-    typedef shared_ptr<UIElement>(*RenderFrameTypeFunc)(void);
+    typedef shared_ptr<UIElement> (*RenderFrameTypeFunc)(void);
 
     template <class T>
     bool RegisterRenderFrameType(const string& name)
@@ -56,12 +54,14 @@ public:
         if (m_RenderFrameTypes.contains_key(name))
             return false;
 
-        m_RenderFrameTypes.add(name, []() -> shared_ptr<UIElement> { return shared_ptr<UIElement>(New T); });
+        m_RenderFrameTypes.add(name, []() -> shared_ptr<UIElement>
+            {
+                return shared_ptr<UIElement>(New T);
+            });
         return true;
     }
 
 private:
-
     bool LoadFile(const string& filename, shared_ptr<UIElement>& pParentElement);
 
     Color ParseColor(rapidxml::xml_node<>* node);
@@ -69,12 +69,15 @@ private:
     UIState ParseState(const string& state);
     string ParseName(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pParentElement);
 
-    void ParseBindings(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pElement, const string& nodeName, const EventID& eventId);
+    void ParseBindings(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pElement,
+        const string& nodeName, const EventID& eventId);
 
-    void ParseElementNodes(rapidxml::xml_node<>* root, shared_ptr<UIElement>& pParentElement, const string& dirname);
+    void ParseElementNodes(
+        rapidxml::xml_node<>* root, shared_ptr<UIElement>& pParentElement, const string& dirname);
 
     UIFont* ParseFont(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pParentElement);
-    bool ParseElement(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pElement, shared_ptr<UIElement>& pParentElement, const string& dirname);
+    bool ParseElement(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pElement,
+        shared_ptr<UIElement>& pParentElement, const string& dirname);
     void ParseFrame(rapidxml::xml_node<>* node, shared_ptr<UIFrame>& pFrame);
     void ParseLabel(rapidxml::xml_node<>* node, shared_ptr<UILabel>& pLabel);
     void ParseInput(rapidxml::xml_node<>* node, shared_ptr<UIInput>& pInput);
@@ -92,10 +95,8 @@ private:
     Map<string, RenderFrameTypeFunc> m_RenderFrameTypes;
 
 public:
-
     static void Script_RegisterFunctions();
     static int Script_GetElement(lua_State* L);
-
 };
 
 } // namespace dusk

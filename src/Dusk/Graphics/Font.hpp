@@ -11,14 +11,12 @@ namespace dusk
 
 class TextBuffer;
 
-class Font :
-    public TrackedObject
+class Font : public TrackedObject
 {
 
     friend class TextBuffer;
 
 public:
-
     Font() = default;
     Font(const Font&) = default;
     Font& operator=(const Font&) = default;
@@ -33,7 +31,6 @@ public:
     bool IsLoaded() const { return m_Loaded; }
 
 private:
-
     inline const sf::Font& GetSFMLFont() const { return m_SfFont; }
 
     bool m_Loaded = false;
@@ -43,7 +40,6 @@ private:
     sf::Font m_SfFont;
 
 public:
-
     static void Script_RegisterFunctions();
     static int Script_New(lua_State* L);
     static int Script_Delete(lua_State* L);

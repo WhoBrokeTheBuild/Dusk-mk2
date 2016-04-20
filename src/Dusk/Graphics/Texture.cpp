@@ -9,7 +9,8 @@
 namespace dusk
 {
 
-bool Texture::Load(const string& filename)
+bool
+Texture::Load(const string& filename)
 {
     DuskExtLog("verbose", "Loading texture %s", filename.c_str());
     DuskBenchStart();
@@ -24,13 +25,15 @@ bool Texture::Load(const string& filename)
     return true;
 }
 
-void Texture::Script_RegisterFunctions()
+void
+Texture::Script_RegisterFunctions()
 {
     Scripting::RegisterFunction("dusk_texture_new", &Texture::Script_New);
     Scripting::RegisterFunction("dusk_texture_delete", &Texture::Script_Delete);
 }
 
-int Texture::Script_New(lua_State* L)
+int
+Texture::Script_New(lua_State* L)
 {
     string filename = lua_tostring(L, 1);
 
@@ -42,7 +45,8 @@ int Texture::Script_New(lua_State* L)
     return 1;
 }
 
-int Texture::Script_Delete(lua_State* L)
+int
+Texture::Script_Delete(lua_State* L)
 {
     Texture* pTexture = (Texture*)lua_tointeger(L, 1);
     delete pTexture;

@@ -6,11 +6,9 @@
 namespace dusk
 {
 
-class UIButton :
-    public UIElement
+class UIButton : public UIElement
 {
 public:
-
     enum : EventID
     {
         EvtClick = 100,
@@ -28,9 +26,7 @@ public:
     virtual inline void Click() { Dispatch(Event(UIButton::EvtClick)); }
 
 protected:
-
     virtual void UpdateState() override;
-
 };
 
 } // namespace dusk

@@ -6,16 +6,10 @@
 namespace dusk
 {
 
-class UIRenderFrame :
-    public UIFrame
+class UIRenderFrame : public UIFrame
 {
 public:
-
-
-
 protected:
-
-
 }; // class UIRenderFrame
 
 } // namespace dusk

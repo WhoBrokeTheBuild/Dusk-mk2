@@ -2,7 +2,8 @@
 #define DUSK_UTILITY_PLATFORM_HPP
 
 // Platform Detection
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__) && !defined(__GNUC__)
+#if defined(WIN32) || defined(_WIN32)                                                              \
+    || defined(__WIN32) && !defined(__CYGWIN__) && !defined(__GNUC__)
 
 #define DUSK_OS_WINDOWS
 

@@ -17,15 +17,11 @@ namespace dusk
 /// \brief A templated map. Based on std::map
 ///
 ////////////////////////////////////////////////////////////
-template <class KeyType, class ValueType, 
-          typename Sort = std::less<KeyType>, 
-          typename Alloc = std::allocator<std::pair<KeyType, ValueType>>>
-class Map :
-    public TrackedObject,
-    public std::map<KeyType, ValueType, Sort, Alloc>
+template <class KeyType, class ValueType, typename Sort = std::less<KeyType>,
+    typename Alloc = std::allocator<std::pair<KeyType, ValueType>>>
+class Map : public TrackedObject, public std::map<KeyType, ValueType, Sort, Alloc>
 {
 public:
-
     typedef std::map<KeyType, ValueType, Sort, Alloc> STLType;
 
     virtual inline string GetClassName() const override { return "Map"; }
@@ -36,10 +32,7 @@ public:
     /// \param pair A new item to add to the collection
     ///
     ////////////////////////////////////////////////////////////
-    inline void add(std::pair<KeyType, ValueType> pair)
-    {
-        STLType::insert(pair);
-    }
+    inline void add(std::pair<KeyType, ValueType> pair) { STLType::insert(pair); }
 
     ////////////////////////////////////////////////////////////
     /// \brief Add a new pair to the collection. Alias for insert(pair(key, value))

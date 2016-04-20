@@ -17,16 +17,13 @@ namespace dusk
 /// \brief A templated hash map. Based on std::unordered_map
 ///
 ////////////////////////////////////////////////////////////
-template <class KeyType, class ValueType, 
-            typename Hasher = std::hash<KeyType>,
-            typename KeyEqual = std::equal_to<KeyType>,
-            typename Alloc = std::allocator<std::pair<KeyType, ValueType>>>
-class HashMap :
-    public TrackedObject,
-    public std::unordered_map<KeyType, ValueType, Hasher, KeyEqual, Alloc>
+template <class KeyType, class ValueType, typename Hasher = std::hash<KeyType>,
+    typename KeyEqual = std::equal_to<KeyType>,
+    typename Alloc = std::allocator<std::pair<KeyType, ValueType>>>
+class HashMap : public TrackedObject,
+                public std::unordered_map<KeyType, ValueType, Hasher, KeyEqual, Alloc>
 {
 public:
-
     typedef std::unordered_map<KeyType, ValueType, Hasher, KeyEqual, Alloc> STLType;
 
     virtual inline string GetClassName() const override { return "Hash Map"; }
@@ -37,10 +34,7 @@ public:
     /// \param pair A new item to add to the collection
     ///
     ////////////////////////////////////////////////////////////
-    inline void add(std::pair<KeyType, ValueType> pair)
-    {
-        STLType::insert(pair);
-    }
+    inline void add(std::pair<KeyType, ValueType> pair) { STLType::insert(pair); }
 
     ////////////////////////////////////////////////////////////
     /// \brief Add a new pair to the collection. Alias for insert(pair(key, value))
@@ -125,6 +119,6 @@ public:
 
 } // namespace dusk
 
-  /// @}
+/// @}
 
 #endif // DUSK_COLLECTIONS_HASH_MAP_HPP

@@ -9,7 +9,8 @@ using std::string;
 namespace dusk
 {
 
-inline void ConsolePause(const string& msg = "Press enter to continue...")
+inline void
+ConsolePause(const string& msg = "Press enter to continue...")
 {
     std::cout << msg;
     std::cin.sync();

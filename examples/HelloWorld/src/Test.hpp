@@ -1,6 +1,0 @@
-#ifndef HELLOWORLD_TEST_HPP
-#define HELLOWORLD_TEST_HPP
-
-int TestFunc();
-
-#endif // HELLOWORLD_TEST_HPP

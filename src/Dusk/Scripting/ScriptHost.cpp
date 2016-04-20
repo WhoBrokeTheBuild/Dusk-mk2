@@ -30,7 +30,8 @@ ScriptHost::~ScriptHost()
     lua_close(mp_LuaState);
 }
 
-bool ScriptHost::RegisterFunction(const string& funcName, LuaCallback callback)
+bool
+ScriptHost::RegisterFunction(const string& funcName, LuaCallback callback)
 {
     if (funcName.empty())
     {
@@ -47,7 +48,8 @@ bool ScriptHost::RegisterFunction(const string& funcName, LuaCallback callback)
     return true;
 }
 
-bool ScriptHost::RunFile(const string& filename)
+bool
+ScriptHost::RunFile(const string& filename)
 {
     int status = luaL_loadfile(mp_LuaState, filename.c_str());
 
@@ -65,11 +67,12 @@ bool ScriptHost::RunFile(const string& filename)
 error:
 
     DuskExtLog("error", "%s", lua_tostring(mp_LuaState, -1)); // get error message from stack
-    lua_pop(mp_LuaState, 1); // remove error message
+    lua_pop(mp_LuaState, 1);                                  // remove error message
     return false;
 }
 
-bool ScriptHost::RunString(const string& code)
+bool
+ScriptHost::RunString(const string& code)
 {
     int status = luaL_dostring(mp_LuaState, code.c_str());
 
@@ -83,7 +86,7 @@ bool ScriptHost::RunString(const string& code)
 error:
 
     DuskExtLog("error", "%s", lua_tostring(mp_LuaState, -1)); // get error message from stack
-    lua_pop(mp_LuaState, 1); // remove error message
+    lua_pop(mp_LuaState, 1);                                  // remove error message
     return false;
 }
 

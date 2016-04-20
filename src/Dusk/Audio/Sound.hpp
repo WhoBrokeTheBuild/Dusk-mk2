@@ -9,17 +9,11 @@
 namespace dusk
 {
 
-class Sound :
-    public TrackedObject,
-    public EventDispatcher
+class Sound : public TrackedObject, public EventDispatcher
 {
 public:
-
-
 private:
-
     sf::Sound m_SfSound;
-
 };
 
 } // namespace dusk

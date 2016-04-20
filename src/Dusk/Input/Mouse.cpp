@@ -3,7 +3,8 @@
 namespace dusk
 {
 
-Mouse::Button Mouse::ConvertSFMLMouseButton(sf::Mouse::Button button)
+Mouse::Button
+Mouse::ConvertSFMLMouseButton(sf::Mouse::Button button)
 {
     switch (button)
     {
@@ -27,13 +28,15 @@ Mouse::Button Mouse::ConvertSFMLMouseButton(sf::Mouse::Button button)
     }
 }
 
-int MouseButtonEventData::PushDataToLua(lua_State* L) const
+int
+MouseButtonEventData::PushDataToLua(lua_State* L) const
 {
     lua_pushinteger(L, m_MouseButton);
     return 1;
 }
 
-int MouseMoveEventData::PushDataToLua(lua_State* L) const
+int
+MouseMoveEventData::PushDataToLua(lua_State* L) const
 {
     lua_pushnumber(L, m_MousePos.x);
     lua_pushnumber(L, m_MousePos.y);
@@ -42,7 +45,8 @@ int MouseMoveEventData::PushDataToLua(lua_State* L) const
     return 4;
 }
 
-int MouseScrollEventData::PushDataToLua(lua_State* L) const
+int
+MouseScrollEventData::PushDataToLua(lua_State* L) const
 {
     lua_pushnumber(L, m_ScrollX);
     lua_pushnumber(L, m_ScrollY);

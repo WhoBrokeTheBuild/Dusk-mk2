@@ -16,7 +16,7 @@ namespace dusk
 {
 
 typedef unsigned int Flag;
-typedef int(*LuaCallback)(lua_State* L);
+typedef int (*LuaCallback)(lua_State* L);
 
 } // namespace dusk
 

@@ -9,39 +9,47 @@
 namespace dusk
 {
 
-void GraphicsContext::Clear()
+void
+GraphicsContext::Clear()
 {
     m_SfWindow.clear();
 }
 
-void GraphicsContext::SwapBuffers()
+void
+GraphicsContext::SwapBuffers()
 {
     m_SfWindow.display();
 }
 
-void GraphicsContext::Draw(Sprite* sprite)
+void
+GraphicsContext::Draw(Sprite* sprite)
 {
     m_SfWindow.draw(sprite->GetSFMLSprite());
 }
 
-void GraphicsContext::Draw(TextBuffer* textBuffer)
+void
+GraphicsContext::Draw(TextBuffer* textBuffer)
 {
     m_SfWindow.draw(textBuffer->GetSFMLText());
 }
 
-void GraphicsContext::Draw(const sf::Drawable& drawable)
+void
+GraphicsContext::Draw(const sf::Drawable& drawable)
 {
     m_SfWindow.draw(drawable);
 }
 
-void GraphicsContext::Script_RegisterFunctions()
+void
+GraphicsContext::Script_RegisterFunctions()
 {
     Scripting::RegisterFunction("dusk_graphics_context_clear", &GraphicsContext::Script_Clear);
     Scripting::RegisterFunction("dusk_graphics_context_draw", &GraphicsContext::Script_Draw);
-    Scripting::RegisterFunction("dusk_graphics_context_swap_buffers", &GraphicsContext::Script_SwapBuffers);
+    Scripting::RegisterFunction(
+        "dusk_graphics_context_swap_buffers", &GraphicsContext::Script_SwapBuffers);
 }
 
-int GraphicsContext::Script_Clear(lua_State* L)
+int
+GraphicsContext::Script_Clear(lua_State* L)
 {
     GraphicsContext* pContext = (GraphicsContext*)lua_tointeger(L, 1);
 
@@ -50,7 +58,8 @@ int GraphicsContext::Script_Clear(lua_State* L)
     return 0;
 }
 
-int GraphicsContext::Script_Draw(lua_State* L)
+int
+GraphicsContext::Script_Draw(lua_State* L)
 {
     GraphicsContext* pContext = (GraphicsContext*)lua_tointeger(L, 1);
     Sprite* pSprite = (Sprite*)lua_tointeger(L, 2);
@@ -60,7 +69,8 @@ int GraphicsContext::Script_Draw(lua_State* L)
     return 0;
 }
 
-int GraphicsContext::Script_SwapBuffers(lua_State* L)
+int
+GraphicsContext::Script_SwapBuffers(lua_State* L)
 {
     GraphicsContext* pContext = (GraphicsContext*)lua_tointeger(L, 1);
 

@@ -12,7 +12,6 @@ namespace dusk
 class Mouse
 {
 public:
-
     enum Button
     {
         Invalid = -1,
@@ -29,19 +28,19 @@ public:
 
 }; // class Mouse
 
-class MouseButtonEventData :
-    public EventData
+class MouseButtonEventData : public EventData
 {
 public:
+    MouseButtonEventData()
+        : m_MouseButton(Mouse::Button::Invalid)
+    {
+    }
 
-    MouseButtonEventData() :
-        m_MouseButton(Mouse::Button::Invalid)
-    { }
-
-    MouseButtonEventData(const Mouse::Button& button, const float& x, const float& y) :
-        m_MouseButton(button),
-        m_MousePos(x, y)
-    { }
+    MouseButtonEventData(const Mouse::Button& button, const float& x, const float& y)
+        : m_MouseButton(button)
+        , m_MousePos(x, y)
+    {
+    }
 
     virtual inline string GetClassName() const override { return "Mouse Button Event Data"; }
 
@@ -59,29 +58,24 @@ public:
     virtual int PushDataToLua(lua_State* L) const override;
 
 private:
-
     Mouse::Button m_MouseButton;
 
     Vector2f m_MousePos;
 
 }; // class MouseButtonEventData
 
-class MouseMoveEventData :
-    public EventData
+class MouseMoveEventData : public EventData
 {
 public:
-
     MouseMoveEventData() = default;
     MouseMoveEventData(const MouseMoveEventData&) = default;
-    MouseMoveEventData(const float& x, const float& y, const float& dx, const float& dy) :
-        m_MousePos(x, y),
-        m_MouseDelta(dx, dy)
-    { }
-
-    virtual inline string GetClassName() const
+    MouseMoveEventData(const float& x, const float& y, const float& dx, const float& dy)
+        : m_MousePos(x, y)
+        , m_MouseDelta(dx, dy)
     {
-        return "Mouse Move Event Data";
     }
+
+    virtual inline string GetClassName() const { return "Mouse Move Event Data"; }
 
     virtual inline EventData* Clone() const
     {
@@ -99,50 +93,39 @@ public:
     virtual int PushDataToLua(lua_State* L) const;
 
 private:
-
     Vector2f m_MousePos;
     Vector2f m_MouseDelta;
 
 }; // class MouseMoveEventData
 
-class MouseScrollEventData :
-    public EventData
+class MouseScrollEventData : public EventData
 {
 public:
-
-    MouseScrollEventData() :
-        m_ScrollX(0),
-        m_ScrollY(0)
-    { }
-
-    MouseScrollEventData(const float& x, const float& y) :
-        m_ScrollX(x),
-        m_ScrollY(y)
-    { }
-
-    virtual inline string GetClassName() const
+    MouseScrollEventData()
+        : m_ScrollX(0)
+        , m_ScrollY(0)
     {
-        return "Mouse Scroll Event Data";
     }
+
+    MouseScrollEventData(const float& x, const float& y)
+        : m_ScrollX(x)
+        , m_ScrollY(y)
+    {
+    }
+
+    virtual inline string GetClassName() const { return "Mouse Scroll Event Data"; }
 
     virtual inline EventData* Clone() const
     {
         return New MouseScrollEventData(m_ScrollX, m_ScrollY);
     }
 
-    inline double GetScrollX() const
-    {
-        return m_ScrollX;
-    }
-    inline double GetScrollY() const
-    {
-        return m_ScrollY;
-    }
+    inline double GetScrollX() const { return m_ScrollX; }
+    inline double GetScrollY() const { return m_ScrollY; }
 
     virtual int PushDataToLua(lua_State* L) const;
 
 private:
-
     float m_ScrollX;
     float m_ScrollY;
 

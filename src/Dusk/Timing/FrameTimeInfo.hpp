@@ -11,7 +11,6 @@ namespace dusk
 class FrameTimeInfo
 {
 public:
-
     FrameTimeInfo() = default;
     FrameTimeInfo(const FrameTimeInfo&) = default;
     FrameTimeInfo& operator=(const FrameTimeInfo&) = default;

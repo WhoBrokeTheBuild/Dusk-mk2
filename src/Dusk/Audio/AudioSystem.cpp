@@ -5,9 +5,6 @@
 namespace dusk
 {
 
-AudioSystem::AudioSystem()
-{
-
-}
+AudioSystem::AudioSystem() {}
 
 } // namespace dusk

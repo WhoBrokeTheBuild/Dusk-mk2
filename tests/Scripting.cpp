@@ -42,10 +42,3 @@ protected:
 
     std::thread m_Thread;
 };
-
-TEST_F(ScriptingTest, Print) {
-    Program::Inst()->GetScriptHost()->RunString(
-        "dusk_log('info', 'Test print');\n"
-        "DuskLog('info', 'Test print');\n"
-    );
-}

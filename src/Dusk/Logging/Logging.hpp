@@ -1,4 +1,4 @@
-/// \file 
+/// \file
 
 #ifndef DUSK_LOGGING_LOGGING_HPP
 #define DUSK_LOGGING_LOGGING_HPP
@@ -40,7 +40,6 @@ class Logger;
 class Logging
 {
 public:
-
     Logging() = delete;
     Logging(const Logging&) = delete;
     Logging& operator=(const Logging&) = delete;
@@ -71,10 +70,7 @@ public:
     /// \returns True if the level exists, false otherwise
     ///
     ////////////////////////////////////////////////////////////
-    static inline bool HasLevel(const string& level)
-    {
-        return (s_Loggers.contains_key(level));
-    }
+    static inline bool HasLevel(const string& level) { return (s_Loggers.contains_key(level)); }
 
     ////////////////////////////////////////////////////////////
     /// \brief Check if a logging level is shown, based on the current minimum logging level
@@ -95,10 +91,7 @@ public:
     /// \param level The name of the level to set as the current minimum logging level
     ///
     ////////////////////////////////////////////////////////////
-    static inline void SetLoggingLevel(const string& level)
-    {
-        s_CurrentLevel = s_Levels[level];
-    }
+    static inline void SetLoggingLevel(const string& level) { s_CurrentLevel = s_Levels[level]; }
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the index of the current logging level
@@ -106,10 +99,7 @@ public:
     /// \returns The index of the current logging level
     ///
     ////////////////////////////////////////////////////////////
-    static inline int GetLoggingLevel()
-    {
-        return s_CurrentLevel;
-    }
+    static inline int GetLoggingLevel() { return s_CurrentLevel; }
 
     ////////////////////////////////////////////////////////////
     /// \brief Add a new console logger for a given level
@@ -168,7 +158,8 @@ public:
     /// \param line The source line number of the message
     ///
     ////////////////////////////////////////////////////////////
-    static void Log(const string& level, const string& message, const string& file, const int& line);
+    static void Log(
+        const string& level, const string& message, const string& file, const int& line);
 
     ////////////////////////////////////////////////////////////
     /// \brief Log a formatted message through all loggers for a given level. printf style
@@ -181,10 +172,10 @@ public:
     /// \param ... The arguments to be formatted into the log. printf style
     ///
     ////////////////////////////////////////////////////////////
-    static void ExtLog(const string& level, const string& format, const string& file, const int line, ...);
+    static void ExtLog(
+        const string& level, const string& format, const string& file, const int line, ...);
 
 private:
-
     static void Format(const char* level, const char* message, const char* file, const int& line);
 
     static void DispatchLog(const string& level);
@@ -206,7 +197,6 @@ private:
     static Map<string, ArrayList<Logger*>> s_Loggers;
 
 public:
-
     /// \cond SCRIPTING
 
     static void Script_RegisterFunctions();
@@ -226,8 +216,7 @@ public:
 /// \param MSG The message to log
 ///
 ////////////////////////////////////////////////////////////
-#define DuskLog(LVL, MSG) \
-Logging::Log(LVL, MSG, string(__FILE__), __LINE__)
+#define DuskLog(LVL, MSG) Logging::Log(LVL, MSG, string(__FILE__), __LINE__)
 
 ////////////////////////////////////////////////////////////
 /// \def DuskExtLog
@@ -239,8 +228,7 @@ Logging::Log(LVL, MSG, string(__FILE__), __LINE__)
 /// \param ... The arguments to be formatted into the log. printf style
 ///
 ////////////////////////////////////////////////////////////
-#define DuskExtLog(LVL, FMT, ...) \
-Logging::ExtLog(LVL, FMT, string(__FILE__), __LINE__, __VA_ARGS__)
+#define DuskExtLog(LVL, FMT, ...) Logging::ExtLog(LVL, FMT, string(__FILE__), __LINE__, __VA_ARGS__)
 
 } // namespace dusk
 

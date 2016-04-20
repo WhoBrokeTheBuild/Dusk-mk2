@@ -6,7 +6,8 @@
 namespace dusk
 {
 
-bool Music::Load(const string& filename)
+bool
+Music::Load(const string& filename)
 {
     if (!m_SfMusic.openFromFile(filename))
     {
@@ -19,61 +20,71 @@ bool Music::Load(const string& filename)
     return true;
 }
 
-void Music::Play()
+void
+Music::Play()
 {
     m_SfMusic.play();
 }
 
-void Music::Stop()
+void
+Music::Stop()
 {
     m_SfMusic.stop();
 }
 
-void Music::Pause()
+void
+Music::Pause()
 {
     m_SfMusic.pause();
 }
 
-void Music::SetLooping(const bool& isLooping)
+void
+Music::SetLooping(const bool& isLooping)
 {
     m_SfMusic.setLoop(isLooping);
 }
 
-bool Music::IsPlaying() const
+bool
+Music::IsPlaying() const
 {
     return (m_SfMusic.getStatus() == sf::SoundSource::Playing);
 }
 
-bool Music::IsPaused() const
+bool
+Music::IsPaused() const
 {
     return (m_SfMusic.getStatus() == sf::SoundSource::Paused);
 }
 
-bool Music::IsStopped() const
+bool
+Music::IsStopped() const
 {
     return (m_SfMusic.getStatus() == sf::SoundSource::Stopped);
 }
 
-bool Music::IsLooping() const
+bool
+Music::IsLooping() const
 {
     return m_SfMusic.getLoop();
 }
 
-void Music::InitScripting()
+void
+Music::InitScripting()
 {
-    Scripting::RegisterFunction("dusk_music_new",         &Music::Script_New);
-    Scripting::RegisterFunction("dusk_music_delete",      &Music::Script_Delete);
-    Scripting::RegisterFunction("dusk_music_play",        &Music::Script_Play);
-    Scripting::RegisterFunction("dusk_music_stop",        &Music::Script_Stop);
-    Scripting::RegisterFunction("dusk_music_pause",       &Music::Script_Pause);
+    Scripting::RegisterFunction("dusk_music_new", &Music::Script_New);
+    Scripting::RegisterFunction("dusk_music_delete", &Music::Script_Delete);
+    Scripting::RegisterFunction("dusk_music_play", &Music::Script_Play);
+    Scripting::RegisterFunction("dusk_music_stop", &Music::Script_Stop);
+    Scripting::RegisterFunction("dusk_music_pause", &Music::Script_Pause);
     Scripting::RegisterFunction("dusk_music_set_looping", &Music::Script_SetLooping);
-    Scripting::RegisterFunction("dusk_music_is_playing",  &Music::Script_IsPlaying);
-    Scripting::RegisterFunction("dusk_music_is_paused",   &Music::Script_IsPaused);
-    Scripting::RegisterFunction("dusk_music_is_stopped",  &Music::Script_IsStopped);
-    Scripting::RegisterFunction("dusk_music_is_looping",  &Music::Script_IsLooping);
+    Scripting::RegisterFunction("dusk_music_is_playing", &Music::Script_IsPlaying);
+    Scripting::RegisterFunction("dusk_music_is_paused", &Music::Script_IsPaused);
+    Scripting::RegisterFunction("dusk_music_is_stopped", &Music::Script_IsStopped);
+    Scripting::RegisterFunction("dusk_music_is_looping", &Music::Script_IsLooping);
 }
 
-int Music::Script_New(lua_State* L)
+int
+Music::Script_New(lua_State* L)
 {
     string filename = lua_tostring(L, 1);
     Music* pMusic = New Music();
@@ -83,7 +94,8 @@ int Music::Script_New(lua_State* L)
     return 1;
 }
 
-int Music::Script_Delete(lua_State* L)
+int
+Music::Script_Delete(lua_State* L)
 {
     Music* pMusic = (Music*)lua_tointeger(L, 1);
     delete pMusic;
@@ -91,7 +103,8 @@ int Music::Script_Delete(lua_State* L)
     return 0;
 }
 
-int Music::Script_Play(lua_State* L)
+int
+Music::Script_Play(lua_State* L)
 {
     Music* pMusic = (Music*)lua_tointeger(L, 1);
     pMusic->Play();
@@ -99,7 +112,8 @@ int Music::Script_Play(lua_State* L)
     return 0;
 }
 
-int Music::Script_Stop(lua_State* L)
+int
+Music::Script_Stop(lua_State* L)
 {
     Music* pMusic = (Music*)lua_tointeger(L, 1);
     pMusic->Stop();
@@ -107,7 +121,8 @@ int Music::Script_Stop(lua_State* L)
     return 0;
 }
 
-int Music::Script_Pause(lua_State* L)
+int
+Music::Script_Pause(lua_State* L)
 {
     Music* pMusic = (Music*)lua_tointeger(L, 1);
     pMusic->Pause();
@@ -115,7 +130,8 @@ int Music::Script_Pause(lua_State* L)
     return 0;
 }
 
-int Music::Script_SetLooping(lua_State* L)
+int
+Music::Script_SetLooping(lua_State* L)
 {
     Music* pMusic = (Music*)lua_tointeger(L, 1);
     bool loop = lua_toboolean(L, 2) == 1;
@@ -124,7 +140,8 @@ int Music::Script_SetLooping(lua_State* L)
     return 0;
 }
 
-int Music::Script_IsPlaying(lua_State* L)
+int
+Music::Script_IsPlaying(lua_State* L)
 {
     Music* pMusic = (Music*)lua_tointeger(L, 1);
     lua_pushboolean(L, pMusic->IsPlaying());
@@ -132,7 +149,8 @@ int Music::Script_IsPlaying(lua_State* L)
     return 1;
 }
 
-int Music::Script_IsPaused(lua_State* L)
+int
+Music::Script_IsPaused(lua_State* L)
 {
     Music* pMusic = (Music*)lua_tointeger(L, 1);
     lua_pushboolean(L, pMusic->IsPaused());
@@ -140,7 +158,8 @@ int Music::Script_IsPaused(lua_State* L)
     return 1;
 }
 
-int Music::Script_IsStopped(lua_State* L)
+int
+Music::Script_IsStopped(lua_State* L)
 {
     Music* pMusic = (Music*)lua_tointeger(L, 1);
     lua_pushboolean(L, pMusic->IsStopped());
@@ -148,7 +167,8 @@ int Music::Script_IsStopped(lua_State* L)
     return 1;
 }
 
-int Music::Script_IsLooping(lua_State* L)
+int
+Music::Script_IsLooping(lua_State* L)
 {
     Music* pMusic = (Music*)lua_tointeger(L, 1);
     lua_pushboolean(L, pMusic->IsLooping());

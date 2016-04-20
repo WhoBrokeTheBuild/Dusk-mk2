@@ -5,29 +5,24 @@
 namespace dusk
 {
 
-UIButton::UIButton()
-{
-    SetFocusable(false);
-}
+UIButton::UIButton() { SetFocusable(false); }
 
-UIButton::~UIButton()
-{
+UIButton::~UIButton() {}
 
-}
-
-void UIButton::Inherit(const UIElement* pInheritFrom)
+void
+UIButton::Inherit(const UIElement* pInheritFrom)
 {
     UIElement::Inherit(pInheritFrom);
     const UIButton* pInheritFromButton = dynamic_cast<const UIButton*>(pInheritFrom);
     if (pInheritFromButton)
     {
-
     }
 }
 
-void UIButton::OnMouseButtonRelease(const Event& evt)
+void
+UIButton::OnMouseButtonRelease(const Event& evt)
 {
-    //auto pData = evt.GetDataAs<MouseButtonEventData>();
+    // auto pData = evt.GetDataAs<MouseButtonEventData>();
 
     UIElement::OnMouseButtonRelease(evt);
 
@@ -37,7 +32,8 @@ void UIButton::OnMouseButtonRelease(const Event& evt)
     }
 }
 
-void UIButton::UpdateState()
+void
+UIButton::UpdateState()
 {
     UIElement::UpdateState();
     sf::WindowHandle handle = Program::Inst()->GetGraphicsSystem()->GetWindowHandle();
@@ -52,5 +48,4 @@ void UIButton::UpdateState()
         handCursor.set(handle);
     }
 }
-
 }

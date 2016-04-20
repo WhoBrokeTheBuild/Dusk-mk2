@@ -7,17 +7,17 @@ namespace dusk
 
 void* TrackedObject::operator new(size_t size)
 {
-    // Allocate memory normally 
+    // Allocate memory normally
     return malloc(size);
 }
 
 void* TrackedObject::operator new[](size_t size)
 {
-    // Allocate memory normally 
+    // Allocate memory normally
     return malloc(size);
 }
 
-void* TrackedObject::operator new(size_t size, int lineNumber, const char *filename)
+void* TrackedObject::operator new(size_t size, int lineNumber, const char* filename)
 {
     // Call base operator
     void* ptr = ::operator new(size);
@@ -28,7 +28,7 @@ void* TrackedObject::operator new(size_t size, int lineNumber, const char *filen
     return ptr;
 }
 
-void* TrackedObject::operator new[](size_t size, int lineNumber, const char *filename)
+void* TrackedObject::operator new[](size_t size, int lineNumber, const char* filename)
 {
     // Call base operator
     void* ptr = ::operator new(size);
@@ -39,21 +39,21 @@ void* TrackedObject::operator new[](size_t size, int lineNumber, const char *fil
     return ptr;
 }
 
-void TrackedObject::operator delete(void *ptr)
+void TrackedObject::operator delete(void* ptr)
 {
     // Remove the allocation record if it exists
     MemoryTracker::RemoveAllocation((TrackedObject*)ptr);
 
-    // Free memory normally 
+    // Free memory normally
     free(ptr);
 }
 
-void TrackedObject::operator delete[](void *ptr)
+void TrackedObject::operator delete[](void* ptr)
 {
     // Remove the allocation record if it exists
     MemoryTracker::RemoveAllocation((TrackedObject*)ptr);
 
-    // Free memory normally 
+    // Free memory normally
     free(ptr);
 }
 

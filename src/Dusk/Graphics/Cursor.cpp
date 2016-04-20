@@ -18,12 +18,13 @@ dusk::Cursor::Cursor(const dusk::Cursor::TYPE t)
     case Cursor::TEXT:
         CursorType = LoadCursor(NULL, IDC_IBEAM);
         break;
-        //For more cursor options on Windows go here:
+        // For more cursor options on Windows go here:
         // http://msdn.microsoft.com/en-us/library/ms648391%28v=vs.85%29.aspx
     }
 }
 
-void dusk::Cursor::set(const sf::WindowHandle& aWindowHandle) const
+void
+dusk::Cursor::set(const sf::WindowHandle& aWindowHandle) const
 {
     SetClassLongPtr(aWindowHandle, GCLP_HCURSOR, reinterpret_cast<LONG_PTR>(CursorType));
 }
@@ -59,7 +60,8 @@ dusk::Cursor::Cursor(const dusk::Cursor::TYPE t)
     }
 }
 
-void dusk::Cursor::set(const sf::WindowHandle& aWindowHandle) const
+void
+dusk::Cursor::set(const sf::WindowHandle& aWindowHandle) const
 {
     XDefineCursor(display, aWindowHandle, CursorType);
     XFlush(display);

@@ -19,12 +19,9 @@ namespace dusk
 ///
 ////////////////////////////////////////////////////////////
 template <class ValueType, typename Alloc = std::allocator<ValueType>>
-class ArrayList :
-    public TrackedObject,
-    public std::vector<ValueType, Alloc>
+class ArrayList : public TrackedObject, public std::vector<ValueType, Alloc>
 {
 public:
-
     typedef std::vector<ValueType, Alloc> STLType;
 
     virtual inline string GetClassName() const override { return "Array List"; }
@@ -35,10 +32,7 @@ public:
     /// \param item A new item to add to the collection
     ///
     ////////////////////////////////////////////////////////////
-    inline void add(const ValueType& item)
-    {
-        STLType::push_back(item);
-    }
+    inline void add(const ValueType& item) { STLType::push_back(item); }
 
     ////////////////////////////////////////////////////////////
     /// \brief Check whether an item exists in the collection
@@ -50,7 +44,8 @@ public:
     ////////////////////////////////////////////////////////////
     inline bool contains(const ValueType& item) const
     {
-        return (STLType::empty() ? false : std::find(STLType::cbegin(), STLType::cend(), item) != STLType::cend());
+        return (STLType::empty() ? false : std::find(STLType::cbegin(), STLType::cend(), item)
+                    != STLType::cend());
     }
 
     ////////////////////////////////////////////////////////////
@@ -99,7 +94,7 @@ public:
 
         return false;
     }
-    
+
     ////////////////////////////////////////////////////////////
     /// \brief Remove all occurrences of an item from the collection
     ///

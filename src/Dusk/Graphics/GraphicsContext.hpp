@@ -12,14 +12,12 @@ class GraphicsSystem;
 class Sprite;
 class TextBuffer;
 
-class GraphicsContext :
-    public TrackedObject
+class GraphicsContext : public TrackedObject
 {
 
     friend class GraphicsSystem;
 
 public:
-
     GraphicsContext() = delete;
     GraphicsContext(const GraphicsContext&) = delete;
     GraphicsContext& operator=(const GraphicsContext&) = delete;
@@ -38,16 +36,14 @@ public:
     inline sf::RenderWindow& GetSFMLWindow() { return m_SfWindow; }
 
 private:
-
-    inline GraphicsContext(sf::RenderWindow& pSFMLWindow) :
-        m_SfWindow(pSFMLWindow)
-    { }
-
+    inline GraphicsContext(sf::RenderWindow& pSFMLWindow)
+        : m_SfWindow(pSFMLWindow)
+    {
+    }
 
     sf::RenderWindow& m_SfWindow;
 
 public:
-
     static void Script_RegisterFunctions();
     static int Script_Clear(lua_State* L);
     static int Script_Draw(lua_State* L);

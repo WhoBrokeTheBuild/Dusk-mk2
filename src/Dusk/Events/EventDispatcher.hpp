@@ -19,13 +19,12 @@ typedef Delegate<void, const Event&> EventDelegate;
 ////////////////////////////////////////////////////////////
 /// \class EventDispatcher EventDispatcher.hpp <Dusk/Events/EventDispatcher.hpp>
 ///
-/// \brief The interface all classes that dispatch events implement. 
+/// \brief The interface all classes that dispatch events implement.
 ///
 ////////////////////////////////////////////////////////////
 class EventDispatcher
 {
 public:
-
     EventDispatcher();
     virtual ~EventDispatcher();
 
@@ -34,8 +33,8 @@ public:
     void AddEventListener(const EventID& eventId, const EventDelegate& funcDelegate);
     void RemoveEventListener(const EventID& eventId, const EventDelegate& funcDelegate);
 
-    void AddEventListener(const EventID& eventId, void(*pFunction)(const Event&));
-    void RemoveEventListener(const EventID& eventId, void(*pFunction)(const Event&));
+    void AddEventListener(const EventID& eventId, void (*pFunction)(const Event&));
+    void RemoveEventListener(const EventID& eventId, void (*pFunction)(const Event&));
 
     template <typename ObjectType, typename Method>
     inline void AddEventListener(const EventID& eventId, ObjectType* pObject, Method method)
@@ -50,7 +49,8 @@ public:
     }
 
     void AddEventListener(const EventID& eventId, ScriptHost* pScriptHost, const string& callback);
-    void RemoveEventListener(const EventID& eventId, ScriptHost* pScriptHost, const string& callback);
+    void RemoveEventListener(
+        const EventID& eventId, ScriptHost* pScriptHost, const string& callback);
 
     template <typename ObjectType>
     void RemoveAllMethods(ObjectType* pObject);
@@ -72,19 +72,18 @@ public:
     static int Script_RemoveEventListener(lua_State* L);
 
 private:
-
     void CleanMap();
 
-    static ArrayList<EventDispatcher*>           s_Dispatchers;
-    HashMap<EventID, ArrayList<EventDelegate*>>  m_EventMap;
+    static ArrayList<EventDispatcher*> s_Dispatchers;
+    HashMap<EventID, ArrayList<EventDelegate*>> m_EventMap;
 
-    bool    m_Changed;
-
+    bool m_Changed;
 
 }; // class EventDispatcher
 
 template <typename ObjectType>
-void EventDispatcher::RemoveAllMethods(ObjectType* object)
+void
+EventDispatcher::RemoveAllMethods(ObjectType* object)
 {
     bool needRepeat = true;
     while (needRepeat)

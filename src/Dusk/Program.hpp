@@ -19,13 +19,9 @@ class Scripting;
 
 class FrameTimeInfo;
 
-class Program :
-    public EventDispatcher,
-    public TrackedObject
+class Program : public EventDispatcher, public TrackedObject
 {
-
 public:
-
     // Singleton Instance
 
     static inline Program* Inst() { return sp_Inst; }
@@ -37,8 +33,8 @@ public:
     static EventID EvtExit;
 
     Program();
-    Program(const Program &) = delete;
-    Program& operator=(const Program &) = delete;
+    Program(const Program&) = delete;
+    Program& operator=(const Program&) = delete;
     virtual ~Program();
 
     virtual inline string GetClassName() const { return "Program"; }
@@ -57,19 +53,17 @@ public:
 
     GraphicsSystem* GetGraphicsSystem() const;
     InputSystem* GetInputSystem() const;
-    //AudioSystem* GetAudioSystem() const;
+    // AudioSystem* GetAudioSystem() const;
 
     ScriptHost* GetScriptHost();
 
 protected:
-
     virtual void Update(FrameTimeInfo& timeInfo);
     virtual void PreRender(GraphicsContext* ctx);
     virtual void Render(GraphicsContext* ctx);
     virtual void PostRender(GraphicsContext* ctx);
 
 private:
-
     static Program* sp_Inst;
 
     bool m_Running;
@@ -81,12 +75,11 @@ private:
 
     unique_ptr<GraphicsSystem> mp_GraphicsSystem;
     unique_ptr<InputSystem> mp_InputSystem;
-    //AudioSystem* mp_AudioSystem;
+    // AudioSystem* mp_AudioSystem;
 
     unique_ptr<ScriptHost> mp_ScriptHost;
 
 public:
-
     static void Script_RegisterFunctions();
     static int Script_Get(lua_State* L);
     static int Script_Exit(lua_State* L);
@@ -96,60 +89,44 @@ public:
 
 }; // class Program
 
-class UpdateEventData :
-    public EventData
+class UpdateEventData : public EventData
 {
 public:
-
-    UpdateEventData(FrameTimeInfo* timeInfo) :
-        mp_TimeInfo(timeInfo)
-    { }
-
-    virtual inline string GetClassName() const
+    UpdateEventData(FrameTimeInfo* timeInfo)
+        : mp_TimeInfo(timeInfo)
     {
-        return "Update Event Data";
     }
 
-    virtual inline EventData* Clone() const
-    {
-        return New UpdateEventData(mp_TimeInfo);
-    }
+    virtual inline string GetClassName() const { return "Update Event Data"; }
+
+    virtual inline EventData* Clone() const { return New UpdateEventData(mp_TimeInfo); }
 
     FrameTimeInfo* GetTimeInfo();
 
     virtual int PushDataToLua(lua_State* L) const;
 
 private:
-
     FrameTimeInfo* mp_TimeInfo;
 
 }; // class UpdateEventData
 
-class RenderEventData :
-    public EventData
+class RenderEventData : public EventData
 {
 public:
-
-    RenderEventData(GraphicsContext* ctx) :
-        mp_Context(ctx)
-    { }
-
-    virtual inline string GetClassName() const
+    RenderEventData(GraphicsContext* ctx)
+        : mp_Context(ctx)
     {
-        return "Render Event Data";
     }
 
-    virtual inline EventData* Clone() const
-    {
-        return New RenderEventData(mp_Context);
-    }
+    virtual inline string GetClassName() const { return "Render Event Data"; }
+
+    virtual inline EventData* Clone() const { return New RenderEventData(mp_Context); }
 
     virtual int PushDataToLua(lua_State* L) const;
 
     virtual GraphicsContext* GetContext();
 
 private:
-
     GraphicsContext* mp_Context;
 
 }; // class RenderEventData

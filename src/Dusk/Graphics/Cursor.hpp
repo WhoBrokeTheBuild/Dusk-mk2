@@ -31,12 +31,17 @@ private:
 
 #endif
 public:
-    enum TYPE { WAIT, TEXT, NORMAL, HAND /*,...*/ };
+    enum TYPE
+    {
+        WAIT,
+        TEXT,
+        NORMAL,
+        HAND /*,...*/
+    };
     Cursor(const TYPE t);
     void set(const sf::WindowHandle& aWindowHandle) const;
     ~Cursor();
 };
-
 }
 
 #endif // DUSK_GRAPHICS_CURSOR_HPP

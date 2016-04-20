@@ -7,11 +7,9 @@
 namespace dusk
 {
 
-class UIInput :
-    public UIElement
+class UIInput : public UIElement
 {
 public:
-
     enum : EventID
     {
         EvtChange = 100,
@@ -50,7 +48,6 @@ public:
     void SetValue(const string& value);
 
 protected:
-
     bool IsValidInput(char input);
     void FixValue();
 
@@ -65,11 +62,9 @@ protected:
     string m_Value;
 
 public:
-
     static void Script_RegisterFunctions();
 
     static int Script_GetValue(lua_State* L);
-
 };
 
 } // namespace dusk

@@ -16,16 +16,13 @@ namespace dusk
 class Program;
 class GraphicsSystem;
 
-class InputSystem :
-    public EventDispatcher,
-    public TrackedObject
+class InputSystem : public EventDispatcher, public TrackedObject
 {
 
     friend class Program;
     friend class GraphicsSystem;
 
 public:
-
     enum : EventID
     {
         EvtKeyPress = 1,
@@ -70,7 +67,6 @@ public:
     void TriggerMappedInputRelease(const MappedInputID& input);
 
 private:
-
     InputSystem() = default;
 
     void ProcessSfEvent(const sf::Event& sfEvent);
@@ -84,7 +80,6 @@ private:
     Map<Mouse::Button, MappedInputID> m_MappedMouseButtons;
 
 public:
-
     static void Script_RegisterFunctions();
     static int Script_Get(lua_State* L);
     static int Script_MapKey(lua_State* L);

@@ -6,20 +6,23 @@
 namespace dusk
 {
 
-bool Font::Load(const string& filename)
+bool
+Font::Load(const string& filename)
 {
     m_Filename = filename;
     m_Loaded = m_SfFont.loadFromFile(filename);
     return m_Loaded;
 }
 
-void Font::Script_RegisterFunctions()
+void
+Font::Script_RegisterFunctions()
 {
     Scripting::RegisterFunction("dusk_font_new", &Font::Script_New);
     Scripting::RegisterFunction("dusk_font_delete", &Font::Script_Delete);
 }
 
-int Font::Script_New(lua_State* L)
+int
+Font::Script_New(lua_State* L)
 {
     string filename = lua_tostring(L, 1);
 
@@ -31,7 +34,8 @@ int Font::Script_New(lua_State* L)
     return 1;
 }
 
-int Font::Script_Delete(lua_State* L)
+int
+Font::Script_Delete(lua_State* L)
 {
     Font* pFont = (Font*)lua_tointeger(L, 1);
     delete pFont;

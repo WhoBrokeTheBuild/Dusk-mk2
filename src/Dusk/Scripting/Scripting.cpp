@@ -10,7 +10,8 @@ namespace dusk
 Map<string, LuaCallback> dusk::Scripting::s_Functions;
 ArrayList<ScriptHost*> dusk::Scripting::s_ScriptHosts;
 
-void dusk::Scripting::AddScriptHost(ScriptHost* pHost)
+void
+dusk::Scripting::AddScriptHost(ScriptHost* pHost)
 {
     s_ScriptHosts.add(pHost);
 
@@ -18,7 +19,8 @@ void dusk::Scripting::AddScriptHost(ScriptHost* pHost)
         pHost->RegisterFunction(it.first, it.second);
 }
 
-ScriptHost* dusk::Scripting::GetScriptHost(lua_State* L)
+ScriptHost*
+dusk::Scripting::GetScriptHost(lua_State* L)
 {
     for (auto it : s_ScriptHosts)
     {
@@ -29,12 +31,14 @@ ScriptHost* dusk::Scripting::GetScriptHost(lua_State* L)
     return nullptr;
 }
 
-void dusk::Scripting::RemoveScriptHost(ScriptHost* pHost)
+void
+dusk::Scripting::RemoveScriptHost(ScriptHost* pHost)
 {
     s_ScriptHosts.erase_all(pHost);
 }
 
-bool dusk::Scripting::RegisterFunction(const string& funcName, LuaCallback callback)
+bool
+dusk::Scripting::RegisterFunction(const string& funcName, LuaCallback callback)
 {
     if (funcName.empty())
     {

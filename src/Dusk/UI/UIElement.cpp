@@ -11,18 +11,17 @@
 namespace dusk
 {
 
-UIElement::UIElement()
-{
-    UpdateLayout();
-}
+UIElement::UIElement() { UpdateLayout(); }
 
 UIElement::~UIElement()
 {
     if (auto pRelativeTo = m_RelativeTo.lock())
-        pRelativeTo->RemoveEventListener(EvtLayoutChange, this, &UIElement::OnRelativeToLayoutChange);
+        pRelativeTo->RemoveEventListener(
+            EvtLayoutChange, this, &UIElement::OnRelativeToLayoutChange);
 }
 
-void UIElement::Inherit(const UIElement* pInheritFrom)
+void
+UIElement::Inherit(const UIElement* pInheritFrom)
 {
     m_Active = pInheritFrom->m_Active;
     m_Visible = pInheritFrom->m_Visible;
@@ -39,12 +38,14 @@ void UIElement::Inherit(const UIElement* pInheritFrom)
     UpdateLayout();
 }
 
-void UIElement::SetUIManager(UIManager* pUIManager)
+void
+UIElement::SetUIManager(UIManager* pUIManager)
 {
     mp_UIManager = pUIManager;
 }
 
-void UIElement::OnUpdate(const Event& evt)
+void
+UIElement::OnUpdate(const Event& evt)
 {
     if (!m_Active)
         return;
@@ -55,7 +56,8 @@ void UIElement::OnUpdate(const Event& evt)
         child->OnUpdate(evt);
 }
 
-void UIElement::OnRender(const Event& evt)
+void
+UIElement::OnRender(const Event& evt)
 {
     auto pData = evt.GetDataAs<RenderEventData>();
 
@@ -87,7 +89,8 @@ void UIElement::OnRender(const Event& evt)
         child->OnRender(evt);
 }
 
-void UIElement::OnMouseMove(const Event& evt)
+void
+UIElement::OnMouseMove(const Event& evt)
 {
     auto pData = evt.GetDataAs<MouseMoveEventData>();
 
@@ -117,9 +120,10 @@ void UIElement::OnMouseMove(const Event& evt)
         child->OnMouseMove(evt);
 }
 
-void UIElement::OnMouseButtonPress(const Event& evt)
+void
+UIElement::OnMouseButtonPress(const Event& evt)
 {
-    //auto pData = evt.GetDataAs<MouseButtonEventData>();
+    // auto pData = evt.GetDataAs<MouseButtonEventData>();
 
     if (m_State == UIState::Disabled)
         return;
@@ -136,9 +140,10 @@ void UIElement::OnMouseButtonPress(const Event& evt)
         child->OnMouseButtonPress(evt);
 }
 
-void UIElement::OnMouseButtonRelease(const Event& evt)
+void
+UIElement::OnMouseButtonRelease(const Event& evt)
 {
-    //auto pData = evt.GetDataAs<MouseButtonEventData>();
+    // auto pData = evt.GetDataAs<MouseButtonEventData>();
 
     if (m_State == UIState::Disabled)
         return;
@@ -154,15 +159,18 @@ void UIElement::OnMouseButtonRelease(const Event& evt)
         child->OnMouseButtonRelease(evt);
 }
 
-void UIElement::OnRelativeToLayoutChange(const Event& evt)
+void
+UIElement::OnRelativeToLayoutChange(const Event& evt)
 {
     UpdateLayout();
     Dispatch(evt);
 }
 
-void UIElement::Focus()
+void
+UIElement::Focus()
 {
-    if (!m_Focusable) return;
+    if (!m_Focusable)
+        return;
 
     UIElement* pFocusedElement = mp_UIManager->GetFocusedElement();
     mp_UIManager->SetFocusedElement(this);
@@ -176,14 +184,16 @@ void UIElement::Focus()
     Dispatch(Event(UIElement::EvtFocus));
 }
 
-void UIElement::Blur()
+void
+UIElement::Blur()
 {
     m_HasFocus = false;
     UpdateState();
     Dispatch(Event(UIElement::EvtBlur));
 }
 
-void UIElement::SetFocusable(bool focusable)
+void
+UIElement::SetFocusable(bool focusable)
 {
     m_Focusable = focusable;
     if (!m_Focusable && m_HasFocus)
@@ -192,7 +202,8 @@ void UIElement::SetFocusable(bool focusable)
     }
 }
 
-void UIElement::SetActive(bool active)
+void
+UIElement::SetActive(bool active)
 {
     m_Active = active;
     UpdateState();
@@ -206,7 +217,8 @@ void UIElement::SetActive(bool active)
     }
 }
 
-void UIElement::SetVisible(bool visible)
+void
+UIElement::SetVisible(bool visible)
 {
     m_Visible = visible;
     if (m_Visible)
@@ -215,7 +227,8 @@ void UIElement::SetVisible(bool visible)
         Dispatch(Event(UIElement::EvtHide));
 }
 
-void UIElement::UpdateState()
+void
+UIElement::UpdateState()
 {
     if (!m_Active)
     {
@@ -237,7 +250,8 @@ void UIElement::UpdateState()
     UpdateStateData();
 }
 
-void UIElement::SetSize(const Vector2f& size)
+void
+UIElement::SetSize(const Vector2f& size)
 {
     m_TargetSize = size;
 
@@ -245,7 +259,8 @@ void UIElement::SetSize(const Vector2f& size)
     Dispatch(Event(EvtLayoutChange));
 }
 
-void UIElement::SetParent(weak_ptr<UIElement> pParent)
+void
+UIElement::SetParent(weak_ptr<UIElement> pParent)
 {
     mp_Parent = pParent;
 
@@ -253,21 +268,25 @@ void UIElement::SetParent(weak_ptr<UIElement> pParent)
     Dispatch(Event(EvtLayoutChange));
 }
 
-void UIElement::SetRelativeTo(weak_ptr<UIElement> pRelativeTo)
+void
+UIElement::SetRelativeTo(weak_ptr<UIElement> pRelativeTo)
 {
     if (auto pOldRelativeTo = m_RelativeTo.lock())
-        pOldRelativeTo->RemoveEventListener(EvtLayoutChange, this, &UIElement::OnRelativeToLayoutChange);
+        pOldRelativeTo->RemoveEventListener(
+            EvtLayoutChange, this, &UIElement::OnRelativeToLayoutChange);
 
     m_RelativeTo = pRelativeTo;
 
     if (auto pNewRelativeTo = m_RelativeTo.lock())
-        pNewRelativeTo->AddEventListener(EvtLayoutChange, this, &UIElement::OnRelativeToLayoutChange);
+        pNewRelativeTo->AddEventListener(
+            EvtLayoutChange, this, &UIElement::OnRelativeToLayoutChange);
 
     UpdateLayout();
     Dispatch(Event(EvtLayoutChange));
 }
 
-void UIElement::SetRelativePoint(UIRelPoint relPoint)
+void
+UIElement::SetRelativePoint(UIRelPoint relPoint)
 {
     m_RelativePoint = relPoint;
 
@@ -275,7 +294,8 @@ void UIElement::SetRelativePoint(UIRelPoint relPoint)
     Dispatch(Event(EvtLayoutChange));
 }
 
-void UIElement::SetOffset(const Vector2f& offset)
+void
+UIElement::SetOffset(const Vector2f& offset)
 {
     m_Offset = offset;
 
@@ -283,24 +303,28 @@ void UIElement::SetOffset(const Vector2f& offset)
     Dispatch(Event(EvtLayoutChange));
 }
 
-void UIElement::SetFont(UIFont* pFont, const UIState& state /*= UIState::StateDefault*/)
+void
+UIElement::SetFont(UIFont* pFont, const UIState& state /*= UIState::StateDefault*/)
 {
     m_Font.SetValue(state, pFont);
     UpdateStateData();
 }
 
-void UIElement::SetText(const string& text)
+void
+UIElement::SetText(const string& text)
 {
     m_TextBuffer.SetText(text);
     UpdateLayout();
 }
 
-void UIElement::AddChild(shared_ptr<UIElement>& pChild)
+void
+UIElement::AddChild(shared_ptr<UIElement>& pChild)
 {
     m_Children.add(pChild);
 }
 
-void UIElement::UpdateStateData()
+void
+UIElement::UpdateStateData()
 {
     UIFont* pUIFont = m_Font.GetValue(m_State);
     if (pUIFont)
@@ -312,7 +336,8 @@ void UIElement::UpdateStateData()
     }
 }
 
-void UIElement::UpdateLayout()
+void
+UIElement::UpdateLayout()
 {
     if (auto pRelativeTo = m_RelativeTo.lock())
     {
@@ -386,7 +411,8 @@ void UIElement::UpdateLayout()
     }
 }
 
-void UIElement::Script_RegisterFunctions()
+void
+UIElement::Script_RegisterFunctions()
 {
     Scripting::RegisterFunction("dusk_ui_element_is_mouse_over", &UIElement::Script_IsMouseOver);
     Scripting::RegisterFunction("dusk_ui_element_is_mouse_down", &UIElement::Script_IsMouseDown);
@@ -411,7 +437,8 @@ void UIElement::Script_RegisterFunctions()
     Scripting::RegisterFunction("dusk_ui_element_set_size", &UIElement::Script_SetSize);
 }
 
-int UIElement::Script_IsMouseOver(lua_State* L)
+int
+UIElement::Script_IsMouseOver(lua_State* L)
 {
     UIElement* pElement = (UIElement*)lua_tointeger(L, 1);
     const bool& value = pElement->IsMouseOver();
@@ -419,7 +446,8 @@ int UIElement::Script_IsMouseOver(lua_State* L)
     return 1;
 }
 
-int UIElement::Script_IsMouseDown(lua_State* L)
+int
+UIElement::Script_IsMouseDown(lua_State* L)
 {
     UIElement* pElement = (UIElement*)lua_tointeger(L, 1);
     const bool& value = pElement->IsMouseDown();
@@ -427,7 +455,8 @@ int UIElement::Script_IsMouseDown(lua_State* L)
     return 1;
 }
 
-int UIElement::Script_HasFocus(lua_State* L)
+int
+UIElement::Script_HasFocus(lua_State* L)
 {
     UIElement* pElement = (UIElement*)lua_tointeger(L, 1);
     const bool& value = pElement->HasFocus();
@@ -435,7 +464,8 @@ int UIElement::Script_HasFocus(lua_State* L)
     return 1;
 }
 
-int UIElement::Script_IsFocusable(lua_State* L)
+int
+UIElement::Script_IsFocusable(lua_State* L)
 {
     UIElement* pElement = (UIElement*)lua_tointeger(L, 1);
     const bool& value = pElement->IsFocusable();
@@ -443,12 +473,14 @@ int UIElement::Script_IsFocusable(lua_State* L)
     return 1;
 }
 
-int UIElement::Script_SetFocusable(lua_State* L)
+int
+UIElement::Script_SetFocusable(lua_State* L)
 {
     return 0;
 }
 
-int UIElement::Script_IsActive(lua_State* L)
+int
+UIElement::Script_IsActive(lua_State* L)
 {
     UIElement* pElement = (UIElement*)lua_tointeger(L, 1);
     const bool& value = pElement->IsActive();
@@ -456,12 +488,14 @@ int UIElement::Script_IsActive(lua_State* L)
     return 1;
 }
 
-int UIElement::Script_SetActive(lua_State* L)
+int
+UIElement::Script_SetActive(lua_State* L)
 {
     return 0;
 }
 
-int UIElement::Script_IsVisible(lua_State* L)
+int
+UIElement::Script_IsVisible(lua_State* L)
 {
     UIElement* pElement = (UIElement*)lua_tointeger(L, 1);
     const bool& value = pElement->IsVisible();
@@ -469,12 +503,14 @@ int UIElement::Script_IsVisible(lua_State* L)
     return 1;
 }
 
-int UIElement::Script_SetVisible(lua_State* L)
+int
+UIElement::Script_SetVisible(lua_State* L)
 {
     return 0;
 }
 
-int UIElement::Script_GetValue(lua_State* L)
+int
+UIElement::Script_GetValue(lua_State* L)
 {
     UIElement* pElement = (UIElement*)lua_tointeger(L, 1);
     const string& name = pElement->GetName();
@@ -482,7 +518,8 @@ int UIElement::Script_GetValue(lua_State* L)
     return 1;
 }
 
-int UIElement::Script_GetState(lua_State* L)
+int
+UIElement::Script_GetState(lua_State* L)
 {
     UIElement* pElement = (UIElement*)lua_tointeger(L, 1);
     const UIState& state = pElement->GetState();
@@ -490,7 +527,8 @@ int UIElement::Script_GetState(lua_State* L)
     return 1;
 }
 
-int UIElement::Script_GetPos(lua_State* L)
+int
+UIElement::Script_GetPos(lua_State* L)
 {
     UIElement* pElement = (UIElement*)lua_tointeger(L, 1);
     const Vector2f& pos = pElement->GetPos();
@@ -499,7 +537,8 @@ int UIElement::Script_GetPos(lua_State* L)
     return 2;
 }
 
-int UIElement::Script_GetSize(lua_State* L)
+int
+UIElement::Script_GetSize(lua_State* L)
 {
     UIElement* pElement = (UIElement*)lua_tointeger(L, 1);
     const Vector2f& size = pElement->GetSize();
@@ -508,7 +547,8 @@ int UIElement::Script_GetSize(lua_State* L)
     return 2;
 }
 
-int UIElement::Script_SetSize(lua_State* L)
+int
+UIElement::Script_SetSize(lua_State* L)
 {
     UIElement* pElement = (UIElement*)lua_tointeger(L, 1);
     Vector2f size;
@@ -520,7 +560,8 @@ int UIElement::Script_SetSize(lua_State* L)
         {
             size.x = FLT_MIN;
         }
-        else if (xStr == "max")
+
+    else if (xStr == "max")
         {
             size.x = FLT_MAX;
         }
@@ -551,7 +592,8 @@ int UIElement::Script_SetSize(lua_State* L)
     return 0;
 }
 
-int StateChangeData::PushDataToLua(lua_State* L) const
+int
+StateChangeData::PushDataToLua(lua_State* L) const
 {
     lua_pushinteger(L, (int)m_OldState);
     lua_pushinteger(L, (int)m_NewState);

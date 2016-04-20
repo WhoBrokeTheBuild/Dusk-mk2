@@ -3,16 +3,12 @@
 namespace dusk
 {
 
-UILabel::UILabel()
-{
-    SetFocusable(false);
-}
+UILabel::UILabel() { SetFocusable(false); }
 
-UILabel::~UILabel()
-{
-}
+UILabel::~UILabel() {}
 
-void UILabel::Inherit(const UIElement* pInheritFrom)
+void
+UILabel::Inherit(const UIElement* pInheritFrom)
 {
     UIElement::Inherit(pInheritFrom);
     const UILabel* pInheritFromLabel = dynamic_cast<const UILabel*>(pInheritFrom);
@@ -22,7 +18,8 @@ void UILabel::Inherit(const UIElement* pInheritFrom)
     }
 }
 
-void UILabel::Focus()
+void
+UILabel::Focus()
 {
     UIElement::Focus();
     if (auto pTarget = mp_Target.lock())
@@ -31,7 +28,8 @@ void UILabel::Focus()
     }
 }
 
-void UILabel::MouseUp()
+void
+UILabel::MouseUp()
 {
     UIElement::MouseUp();
     if (auto pTarget = mp_Target.lock())
@@ -40,7 +38,8 @@ void UILabel::MouseUp()
     }
 }
 
-void UILabel::MouseDown()
+void
+UILabel::MouseDown()
 {
     UIElement::MouseDown();
     if (auto pTarget = mp_Target.lock())
@@ -48,5 +47,4 @@ void UILabel::MouseDown()
         pTarget->MouseDown();
     }
 }
-
 }

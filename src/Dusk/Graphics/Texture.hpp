@@ -12,14 +12,12 @@ namespace dusk
 
 class Sprite;
 
-class Texture :
-    public TrackedObject
+class Texture : public TrackedObject
 {
 
     friend class Sprite;
 
 public:
-
     Texture() = default;
     Texture(const Texture&) = default;
     Texture& operator=(const Texture&) = default;
@@ -34,17 +32,14 @@ public:
     bool IsLoaded() const { return m_Loaded; }
 
 protected:
-
     inline const sf::Texture& GetSFMLTexture() const { return m_SfTexture; }
 
 private:
-
     bool m_Loaded = false;
 
     sf::Texture m_SfTexture;
 
 public:
-
     static void Script_RegisterFunctions();
     static int Script_New(lua_State* L);
     static int Script_Delete(lua_State* L);

@@ -13,13 +13,13 @@ using namespace rapidxml;
 namespace dusk
 {
 
-UIManager::UIManager() :
-    mp_ScriptHost(New ScriptHost),
-    mp_RootElement(New UIElement),
-    m_Fonts(),
-    m_Textures(),
-    m_UIFonts(),
-    m_UIElements()
+UIManager::UIManager()
+    : mp_ScriptHost(New ScriptHost)
+    , mp_RootElement(New UIElement)
+    , m_Fonts()
+    , m_Textures()
+    , m_UIFonts()
+    , m_UIElements()
 {
     mp_RootElement->SetSize((Vector2f)Program::Inst()->GetGraphicsSystem()->GetWindowSize());
     mp_RootElement->SetUIManager(this);
@@ -27,64 +27,80 @@ UIManager::UIManager() :
     Program::Inst()->AddEventListener(Program::EvtUpdate, this, &UIManager::OnUpdate);
     Program::Inst()->AddEventListener(Program::EvtRender, this, &UIManager::OnRender);
 
-    Program::Inst()->GetGraphicsSystem()->AddEventListener(GraphicsSystem::EvtWindowResize, this, &UIManager::OnWindowResize);
-    Program::Inst()->GetInputSystem()->AddEventListener(InputSystem::EvtMouseMove, this, &UIManager::OnMouseMove);
-    Program::Inst()->GetInputSystem()->AddEventListener(InputSystem::EvtMouseButtonPress, this, &UIManager::OnMouseButtonPress);
-    Program::Inst()->GetInputSystem()->AddEventListener(InputSystem::EvtMouseButtonRelease, this, &UIManager::OnMouseButtonRelease);
+    Program::Inst()->GetGraphicsSystem()->AddEventListener(
+        GraphicsSystem::EvtWindowResize, this, &UIManager::OnWindowResize);
+    Program::Inst()->GetInputSystem()->AddEventListener(
+        InputSystem::EvtMouseMove, this, &UIManager::OnMouseMove);
+    Program::Inst()->GetInputSystem()->AddEventListener(
+        InputSystem::EvtMouseButtonPress, this, &UIManager::OnMouseButtonPress);
+    Program::Inst()->GetInputSystem()->AddEventListener(
+        InputSystem::EvtMouseButtonRelease, this, &UIManager::OnMouseButtonRelease);
 
     lua_State* L = mp_ScriptHost->GetState();
-    lua_pushinteger(L, (ptrdiff_t)this);
+    lua_pushinteger(L, (ptrdiff_t) this);
     lua_setglobal(L, "dusk_ptr_ui_manager");
 }
 
 UIManager::~UIManager()
 {
-    Program::Inst()->GetInputSystem()->RemoveEventListener(InputSystem::EvtMouseButtonRelease, this, &UIManager::OnMouseButtonRelease);
-    Program::Inst()->GetInputSystem()->RemoveEventListener(InputSystem::EvtMouseButtonPress, this, &UIManager::OnMouseButtonPress);
-    Program::Inst()->GetInputSystem()->RemoveEventListener(InputSystem::EvtMouseMove, this, &UIManager::OnMouseMove);
-    Program::Inst()->GetGraphicsSystem()->RemoveEventListener(GraphicsSystem::EvtWindowResize, this, &UIManager::OnWindowResize);
+    Program::Inst()->GetInputSystem()->RemoveEventListener(
+        InputSystem::EvtMouseButtonRelease, this, &UIManager::OnMouseButtonRelease);
+    Program::Inst()->GetInputSystem()->RemoveEventListener(
+        InputSystem::EvtMouseButtonPress, this, &UIManager::OnMouseButtonPress);
+    Program::Inst()->GetInputSystem()->RemoveEventListener(
+        InputSystem::EvtMouseMove, this, &UIManager::OnMouseMove);
+    Program::Inst()->GetGraphicsSystem()->RemoveEventListener(
+        GraphicsSystem::EvtWindowResize, this, &UIManager::OnWindowResize);
 
     Program::Inst()->RemoveEventListener(Program::EvtRender, this, &UIManager::OnRender);
     Program::Inst()->RemoveEventListener(Program::EvtUpdate, this, &UIManager::OnUpdate);
 }
 
-void UIManager::OnUpdate(const Event& evt)
+void
+UIManager::OnUpdate(const Event& evt)
 {
     mp_RootElement->OnUpdate(evt);
 }
 
-void UIManager::OnRender(const Event& evt)
+void
+UIManager::OnRender(const Event& evt)
 {
     mp_RootElement->OnRender(evt);
 }
 
-void UIManager::OnWindowResize(const Event& evt)
+void
+UIManager::OnWindowResize(const Event& evt)
 {
     auto pData = evt.GetDataAs<WindowResizeEventData>();
     mp_RootElement->SetSize((Vector2f)pData->GetSize());
 }
 
-void UIManager::OnMouseMove(const Event& evt)
+void
+UIManager::OnMouseMove(const Event& evt)
 {
     mp_RootElement->OnMouseMove(evt);
 }
 
-void UIManager::OnMouseButtonPress(const Event& evt)
+void
+UIManager::OnMouseButtonPress(const Event& evt)
 {
     mp_RootElement->OnMouseButtonPress(evt);
 }
 
-void UIManager::OnMouseButtonRelease(const Event& evt)
+void
+UIManager::OnMouseButtonRelease(const Event& evt)
 {
     mp_RootElement->OnMouseButtonRelease(evt);
 }
 
-bool UIManager::LoadFile(const string& filename)
+bool
+UIManager::LoadFile(const string& filename)
 {
     return LoadFile(filename, mp_RootElement);
 }
 
-bool UIManager::LoadFile(const string& filename, shared_ptr<UIElement>& pParentElement)
+bool
+UIManager::LoadFile(const string& filename, shared_ptr<UIElement>& pParentElement)
 {
     string dirname = Dirname(filename);
     if (dirname == filename)
@@ -124,7 +140,8 @@ bool UIManager::LoadFile(const string& filename, shared_ptr<UIElement>& pParentE
     for (xml_node<>* node = root->first_node("Font"); node; node = node->next_sibling("Font"))
         ParseFont(node, pParentElement);
 
-    //for (xml_node<>* node = root->first_node("Texture"); node; node = node->next_sibling("Texture"))
+    // for (xml_node<>* node = root->first_node("Texture"); node; node =
+    // node->next_sibling("Texture"))
     //    ParseTexture(node);
 
     ParseElementNodes(root, pParentElement, dirname);
@@ -132,7 +149,8 @@ bool UIManager::LoadFile(const string& filename, shared_ptr<UIElement>& pParentE
     return true;
 }
 
-Color UIManager::ParseColor(rapidxml::xml_node<>* node)
+Color
+UIManager::ParseColor(rapidxml::xml_node<>* node)
 {
     xml_attribute<>* rAttr = node->first_attribute("r");
     xml_attribute<>* gAttr = node->first_attribute("g");
@@ -162,7 +180,8 @@ Color UIManager::ParseColor(rapidxml::xml_node<>* node)
     return color;
 }
 
-dusk::Vector2f UIManager::ParseVector2(rapidxml::xml_node<>* node)
+dusk::Vector2f
+UIManager::ParseVector2(rapidxml::xml_node<>* node)
 {
     xml_attribute<>* xAttr = node->first_attribute("x");
     xml_attribute<>* yAttr = node->first_attribute("y");
@@ -204,7 +223,8 @@ dusk::Vector2f UIManager::ParseVector2(rapidxml::xml_node<>* node)
     return value;
 }
 
-dusk::UIState UIManager::ParseState(const string& state)
+dusk::UIState
+UIManager::ParseState(const string& state)
 {
     if (state == "active")
     {
@@ -222,7 +242,8 @@ dusk::UIState UIManager::ParseState(const string& state)
     return UIState::Default;
 }
 
-string UIManager::ParseName(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pParentElement)
+string
+UIManager::ParseName(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pParentElement)
 {
     xml_attribute<>* nameAttr = node->first_attribute("name");
     if (nameAttr)
@@ -230,9 +251,12 @@ string UIManager::ParseName(rapidxml::xml_node<>* node, shared_ptr<UIElement>& p
     return "";
 }
 
-void UIManager::ParseBindings(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pElement, const string& nodeName, const EventID& eventId)
+void
+UIManager::ParseBindings(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pElement,
+    const string& nodeName, const EventID& eventId)
 {
-    for (xml_node<>* bindNode = node->first_node(nodeName.c_str()); bindNode; bindNode = bindNode->next_sibling(nodeName.c_str()))
+    for (xml_node<>* bindNode = node->first_node(nodeName.c_str()); bindNode;
+         bindNode = bindNode->next_sibling(nodeName.c_str()))
     {
         xml_attribute<>* funcAttr = bindNode->first_attribute("func");
         if (!funcAttr)
@@ -243,7 +267,9 @@ void UIManager::ParseBindings(rapidxml::xml_node<>* node, shared_ptr<UIElement>&
     }
 }
 
-void UIManager::ParseElementNodes(rapidxml::xml_node<>* root, shared_ptr<UIElement>& pParentElement, const string& dirname)
+void
+UIManager::ParseElementNodes(
+    rapidxml::xml_node<>* root, shared_ptr<UIElement>& pParentElement, const string& dirname)
 {
     for (xml_node<>* node = root->first_node(); node; node = node->next_sibling())
     {
@@ -317,7 +343,8 @@ void UIManager::ParseElementNodes(rapidxml::xml_node<>* root, shared_ptr<UIEleme
     }
 }
 
-UIFont* UIManager::ParseFont(xml_node<>* node, shared_ptr<UIElement>& pParentElement)
+UIFont*
+UIManager::ParseFont(xml_node<>* node, shared_ptr<UIElement>& pParentElement)
 {
     const string& name = ParseName(node, pParentElement);
     if (name.empty())
@@ -375,7 +402,9 @@ UIFont* UIManager::ParseFont(xml_node<>* node, shared_ptr<UIElement>& pParentEle
     return nullptr;
 }
 
-bool UIManager::ParseElement(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pElement, shared_ptr<UIElement>& pParentElement, const string& currentDir)
+bool
+UIManager::ParseElement(rapidxml::xml_node<>* node, shared_ptr<UIElement>& pElement,
+    shared_ptr<UIElement>& pParentElement, const string& currentDir)
 {
     const string& name = ParseName(node, pParentElement);
     if (name.empty())
@@ -467,7 +496,8 @@ bool UIManager::ParseElement(rapidxml::xml_node<>* node, shared_ptr<UIElement>& 
     if (textAttr)
         pElement->SetText(textAttr->value());
 
-    for (xml_node<>* backgroundNode = node->first_node("Background"); backgroundNode; backgroundNode = backgroundNode->next_sibling("Background"))
+    for (xml_node<>* backgroundNode = node->first_node("Background"); backgroundNode;
+         backgroundNode = backgroundNode->next_sibling("Background"))
     {
         UIState state = UIState::Default;
         xml_attribute<>* stateAttr = backgroundNode->first_attribute("state");
@@ -478,7 +508,8 @@ bool UIManager::ParseElement(rapidxml::xml_node<>* node, shared_ptr<UIElement>& 
         pElement->SetBackgroundColor(ParseColor(bgColorNode), state);
     }
 
-    for (xml_node<>* fontNode = node->first_node("UseFont"); fontNode; fontNode = fontNode->next_sibling("UseFont"))
+    for (xml_node<>* fontNode = node->first_node("UseFont"); fontNode;
+         fontNode = fontNode->next_sibling("UseFont"))
     {
         xml_attribute<>* nameAttr = fontNode->first_attribute("name");
         if (!nameAttr)
@@ -498,7 +529,8 @@ bool UIManager::ParseElement(rapidxml::xml_node<>* node, shared_ptr<UIElement>& 
         pElement->SetFont(font, state);
     }
 
-    for (xml_node<>* borderNode = node->first_node("Border"); borderNode; borderNode = borderNode->next_sibling("Border"))
+    for (xml_node<>* borderNode = node->first_node("Border"); borderNode;
+         borderNode = borderNode->next_sibling("Border"))
     {
         UIState state = UIState::Default;
         xml_attribute<>* stateAttr = borderNode->first_attribute("state");
@@ -522,6 +554,7 @@ bool UIManager::ParseElement(rapidxml::xml_node<>* node, shared_ptr<UIElement>& 
     xml_node<>* bindingsNode = node->first_node("Bindings");
     if (bindingsNode)
     {
+
         ParseBindings(bindingsNode, pElement, "OnUpdate", UIElement::EvtUpdate);
         ParseBindings(bindingsNode, pElement, "OnRender", UIElement::EvtRender);
         ParseBindings(bindingsNode, pElement, "OnShow", UIElement::EvtShow);
@@ -544,12 +577,13 @@ bool UIManager::ParseElement(rapidxml::xml_node<>* node, shared_ptr<UIElement>& 
     return true;
 }
 
-void UIManager::ParseFrame(rapidxml::xml_node<>* node, shared_ptr<UIFrame>& pFrame)
+void
+UIManager::ParseFrame(rapidxml::xml_node<>* node, shared_ptr<UIFrame>& pFrame)
 {
-
 }
 
-void UIManager::ParseLabel(rapidxml::xml_node<>* node, shared_ptr<UILabel>& pLabel)
+void
+UIManager::ParseLabel(rapidxml::xml_node<>* node, shared_ptr<UILabel>& pLabel)
 {
     xml_attribute<>* targetAttr = node->first_attribute("target");
     if (targetAttr)
@@ -561,7 +595,8 @@ void UIManager::ParseLabel(rapidxml::xml_node<>* node, shared_ptr<UILabel>& pLab
     }
 }
 
-void UIManager::ParseInput(rapidxml::xml_node<>* node, shared_ptr<UIInput>& pInput)
+void
+UIManager::ParseInput(rapidxml::xml_node<>* node, shared_ptr<UIInput>& pInput)
 {
     xml_attribute<>* maxLenAttr = node->first_attribute("maxLength");
     if (maxLenAttr)
@@ -597,7 +632,8 @@ void UIManager::ParseInput(rapidxml::xml_node<>* node, shared_ptr<UIInput>& pInp
     }
 }
 
-void UIManager::ParseButton(rapidxml::xml_node<>* node, shared_ptr<UIButton>& pButton)
+void
+UIManager::ParseButton(rapidxml::xml_node<>* node, shared_ptr<UIButton>& pButton)
 {
     shared_ptr<UIElement> pGenericElement = dynamic_pointer_cast<UIElement>(pButton);
 
@@ -608,17 +644,19 @@ void UIManager::ParseButton(rapidxml::xml_node<>* node, shared_ptr<UIButton>& pB
     }
 }
 
-void UIManager::Script_RegisterFunctions()
+void
+UIManager::Script_RegisterFunctions()
 {
     Scripting::RegisterFunction("dusk_ui_manager_get_element", &UIManager::Script_GetElement);
 
     UIElement::Script_RegisterFunctions();
-    //UIFrame::Script_RegisterFunctions();
-    //UIButton::Script_RegisterFunctions();
+    // UIFrame::Script_RegisterFunctions();
+    // UIButton::Script_RegisterFunctions();
     UIInput::Script_RegisterFunctions();
 }
 
-int UIManager::Script_GetElement(lua_State* L)
+int
+UIManager::Script_GetElement(lua_State* L)
 {
     UIManager* pUI = (UIManager*)lua_tointeger(L, 1);
     const string& name = lua_tostring(L, 2);

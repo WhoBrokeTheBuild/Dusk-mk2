@@ -15,7 +15,6 @@ class ScriptHost;
 class Scripting
 {
 public:
-
     Scripting() = delete;
     Scripting(const Scripting&) = delete;
     Scripting& operator=(const Scripting&) = delete;
@@ -30,7 +29,6 @@ public:
     static bool RegisterFunction(const string& funcName, LuaCallback callback);
 
 private:
-
     static Map<string, LuaCallback> s_Functions;
 
     static ArrayList<ScriptHost*> s_ScriptHosts;

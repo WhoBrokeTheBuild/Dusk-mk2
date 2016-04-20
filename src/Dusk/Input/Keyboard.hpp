@@ -13,7 +13,6 @@ namespace dusk
 class Keyboard
 {
 public:
-
     enum Key
     {
         Invalid = -1,
@@ -137,19 +136,18 @@ public:
 
 }; // class Keyboard
 
-class KeyEventData :
-    public EventData
+class KeyEventData : public EventData
 {
 public:
-
     KeyEventData() = default;
     KeyEventData(const KeyEventData&) = default;
     KeyEventData& operator=(const KeyEventData&) = default;
     ~KeyEventData() = default;
 
-    KeyEventData(const Keyboard::Key& key) :
-        m_Key(key)
-    { }
+    KeyEventData(const Keyboard::Key& key)
+        : m_Key(key)
+    {
+    }
 
     virtual inline string GetClassName() const override { return "Key Event Data"; }
 
@@ -160,21 +158,19 @@ public:
     virtual int PushDataToLua(lua_State* L) const override;
 
 private:
-
     Keyboard::Key m_Key = Keyboard::Key::Invalid;
 
 }; // class KeyEventData
 
-class TextInputEventData :
-    public EventData
+class TextInputEventData : public EventData
 {
 public:
-
     TextInputEventData() = default;
 
-    TextInputEventData(const char32_t& input) :
-        m_Input(input)
-    { }
+    TextInputEventData(const char32_t& input)
+        : m_Input(input)
+    {
+    }
 
     virtual inline string GetClassName() const override { return "Text Input Data"; }
 
@@ -185,7 +181,6 @@ public:
     virtual int PushDataToLua(lua_State* L) const override;
 
 private:
-
     char32_t m_Input = 0;
 
 }; // class TextInputEventData
