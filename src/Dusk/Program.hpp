@@ -22,6 +22,8 @@ class FrameTimeInfo;
 class Program : public EventDispatcher, public TrackedObject
 {
 public:
+    DUSK_CLASSNAME("Program")
+
     // Singleton Instance
 
     static inline Program* Inst() { return sp_Inst; }
@@ -36,8 +38,6 @@ public:
     Program(const Program&) = delete;
     Program& operator=(const Program&) = delete;
     virtual ~Program();
-
-    virtual inline string GetClassName() const { return "Program"; }
 
     Program* Run(int argc, char* argv[]);
     inline void Exit() { m_Running = false; }

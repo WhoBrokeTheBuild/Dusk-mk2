@@ -16,14 +16,13 @@ class FileLogger :
     public Logger
 {
 public:
+    DUSK_CLASSNAME("File Logger")
 
     FileLogger() = delete;
     FileLogger(const string& filename);
     FileLogger(const FileLogger&) = delete;
     FileLogger& operator=(const FileLogger&) = delete;
     virtual ~FileLogger();
-
-    virtual inline string GetClassName() const override { return "File Logger"; }
 
     virtual void Log(const string& line, const LogForegroundColor& fgColor,
                      const LogBackgroundColor& bgColor) override;

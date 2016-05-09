@@ -24,9 +24,9 @@ class HashMap : public TrackedObject,
                 public std::unordered_map<KeyType, ValueType, Hasher, KeyEqual, Alloc>
 {
 public:
-    typedef std::unordered_map<KeyType, ValueType, Hasher, KeyEqual, Alloc> STLType;
+    DUSK_CLASSNAME("Hash Map")
 
-    virtual inline string GetClassName() const override { return "Hash Map"; }
+    typedef std::unordered_map<KeyType, ValueType, Hasher, KeyEqual, Alloc> STLType;
 
     ////////////////////////////////////////////////////////////
     /// \brief Add a new item to the collection. Alias for insert()

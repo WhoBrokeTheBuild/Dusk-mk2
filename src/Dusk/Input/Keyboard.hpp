@@ -139,6 +139,8 @@ public:
 class KeyEventData : public EventData
 {
 public:
+    DUSK_CLASSNAME("Key Event Data")
+
     KeyEventData() = default;
     KeyEventData(const KeyEventData&) = default;
     KeyEventData& operator=(const KeyEventData&) = default;
@@ -148,8 +150,6 @@ public:
         : m_Key(key)
     {
     }
-
-    virtual inline string GetClassName() const override { return "Key Event Data"; }
 
     virtual inline EventData* Clone() const override { return New KeyEventData(m_Key); }
 
@@ -165,14 +165,14 @@ private:
 class TextInputEventData : public EventData
 {
 public:
+    DUSK_CLASSNAME("Text Event Data")
+
     TextInputEventData() = default;
 
     TextInputEventData(const char32_t& input)
         : m_Input(input)
     {
     }
-
-    virtual inline string GetClassName() const override { return "Text Input Data"; }
 
     virtual inline EventData* Clone() const override { return New TextInputEventData(m_Input); }
 

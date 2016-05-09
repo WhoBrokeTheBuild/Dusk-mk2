@@ -31,6 +31,8 @@ public:
 class MouseButtonEventData : public EventData
 {
 public:
+    DUSK_CLASSNAME("Mouse Button Event Data")
+
     MouseButtonEventData()
         : m_MouseButton(Mouse::Button::Invalid)
     {
@@ -41,8 +43,6 @@ public:
         , m_MousePos(x, y)
     {
     }
-
-    virtual inline string GetClassName() const override { return "Mouse Button Event Data"; }
 
     virtual inline EventData* Clone() const override
     {
@@ -67,6 +67,8 @@ private:
 class MouseMoveEventData : public EventData
 {
 public:
+    DUSK_CLASSNAME("Mouse Move Event Data")
+
     MouseMoveEventData() = default;
     MouseMoveEventData(const MouseMoveEventData&) = default;
     MouseMoveEventData(const float& x, const float& y, const float& dx, const float& dy)
@@ -75,9 +77,7 @@ public:
     {
     }
 
-    virtual inline string GetClassName() const { return "Mouse Move Event Data"; }
-
-    virtual inline EventData* Clone() const
+    virtual inline EventData* Clone() const override
     {
         return New MouseMoveEventData(m_MousePos.x, m_MousePos.y, m_MouseDelta.x, m_MouseDelta.y);
     }
@@ -90,7 +90,7 @@ public:
     inline Vector2f GetPos() const { return m_MousePos; }
     inline Vector2f GetDelta() const { return m_MouseDelta; }
 
-    virtual int PushDataToLua(lua_State* L) const;
+    virtual int PushDataToLua(lua_State* L) const override;
 
 private:
     Vector2f m_MousePos;
@@ -101,6 +101,8 @@ private:
 class MouseScrollEventData : public EventData
 {
 public:
+    DUSK_CLASSNAME("Mouse Scroll Event Data")
+
     MouseScrollEventData()
         : m_ScrollX(0)
         , m_ScrollY(0)
@@ -113,9 +115,7 @@ public:
     {
     }
 
-    virtual inline string GetClassName() const { return "Mouse Scroll Event Data"; }
-
-    virtual inline EventData* Clone() const
+    virtual inline EventData* Clone() const override
     {
         return New MouseScrollEventData(m_ScrollX, m_ScrollY);
     }
@@ -123,7 +123,7 @@ public:
     inline double GetScrollX() const { return m_ScrollX; }
     inline double GetScrollY() const { return m_ScrollY; }
 
-    virtual int PushDataToLua(lua_State* L) const;
+    virtual int PushDataToLua(lua_State* L) const override;
 
 private:
     float m_ScrollX;

@@ -22,9 +22,9 @@ template <class ValueType, typename Alloc = std::allocator<ValueType>>
 class ArrayList : public TrackedObject, public std::vector<ValueType, Alloc>
 {
 public:
-    typedef std::vector<ValueType, Alloc> STLType;
+    DUSK_CLASSNAME("Array List")
 
-    virtual inline string GetClassName() const override { return "Array List"; }
+    typedef std::vector<ValueType, Alloc> STLType;
 
     ////////////////////////////////////////////////////////////
     /// \brief Add a new item to the collection. Alias for push_back()

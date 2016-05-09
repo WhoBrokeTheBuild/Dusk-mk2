@@ -12,14 +12,14 @@ namespace dusk
 class Music : public TrackedObject, public EventDispatcher
 {
 public:
+    DUSK_CLASSNAME("Music")
+
     Music() = default;
     Music(const Music&) = delete;
     Music& operator=(const Music&) = delete;
     ~Music() = default;
 
     inline Music(const string& filename) { Load(filename); }
-
-    virtual inline string GetClassName() const { return "Music"; }
 
     bool Load(const string& filename);
 

@@ -11,13 +11,12 @@ class ConsoleLogger :
     public Logger
 {
 public:
+    DUSK_CLASSNAME("Console Logger")
 
     ConsoleLogger() = default;
     ConsoleLogger(const ConsoleLogger&) = delete;
     ConsoleLogger& operator=(const ConsoleLogger&) = delete;
     virtual ~ConsoleLogger() = default;
-
-    virtual inline string GetClassName() const override { return "Console Logger"; }
 
     virtual void Log(const string& line, const LogForegroundColor& fgColor,
                      const LogBackgroundColor& bgColor) override;

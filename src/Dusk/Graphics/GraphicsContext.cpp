@@ -2,7 +2,7 @@
 
 #include <Dusk/Graphics/GraphicsSystem.hpp>
 #include <Dusk/Graphics/Sprite.hpp>
-#include <Dusk/Graphics/TextBuffer.hpp>
+#include <Dusk/Graphics/SpriteText.hpp>
 #include <Dusk/Scripting/Scripting.hpp>
 #include <Dusk/Logging/Logging.hpp>
 
@@ -28,9 +28,9 @@ GraphicsContext::Draw(Sprite* sprite)
 }
 
 void
-GraphicsContext::Draw(TextBuffer* textBuffer)
+GraphicsContext::Draw(SpriteText* text)
 {
-    m_SfWindow.draw(textBuffer->GetSFMLText());
+    m_SfWindow.draw(text->GetSFMLText());
 }
 
 void

@@ -22,9 +22,9 @@ template <class KeyType, class ValueType, typename Sort = std::less<KeyType>,
 class Map : public TrackedObject, public std::map<KeyType, ValueType, Sort, Alloc>
 {
 public:
-    typedef std::map<KeyType, ValueType, Sort, Alloc> STLType;
+    DUSK_CLASSNAME("Map")
 
-    virtual inline string GetClassName() const override { return "Map"; }
+    typedef std::map<KeyType, ValueType, Sort, Alloc> STLType;
 
     ////////////////////////////////////////////////////////////
     /// \brief Add a new item to the collection. Alias for insert()

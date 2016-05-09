@@ -25,6 +25,7 @@
 *.out
 *.app
 
+.dep
 obj
 build
 !lib/*/*.lib

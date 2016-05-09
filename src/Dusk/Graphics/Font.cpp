@@ -1,6 +1,6 @@
 #include "Font.hpp"
 
-#include <Dusk/Graphics/TextBuffer.hpp>
+#include <Dusk/Graphics/SpriteText.hpp>
 #include <Dusk/Scripting/Scripting.hpp>
 
 namespace dusk

@@ -2,16 +2,12 @@
 
 include make/config.mk
 
-OUT_DIR = $(DUSK_OUT_DIR)
-SRC_DIR = src/
-OBJ_DIR = obj/
+SRC = $(shell find $(SRCDIR) -type f -name '*.cpp')
+OBJ = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRC))
+OUT = $(OUTDIR)/libDusk.so
 
-SRC = $(shell find $(SRC_DIR) -type f -name '*.cpp')
-OBJ = $(patsubst $(SRC_DIR)%.cpp,$(OBJ_DIR)%.o,$(SRC))
-OUT = $(OUT_DIR)libDusk.so
-
-CPPFLAGS += $(SFML_CPPFLAGS) $(LUA_CPPFLAGS) $(ASIO_CPPFLAGS) -I $(DUSK_INC_DIR) -I $(SRC_DIR)
-LDFLAGS  += $(SFML_LDFLAGS)  $(LUA_LDFLAGS)  $(ASIO_LDFLAGS)  -L $(DUSK_LIB_DIR)
+CPPFLAGS += $(SFML_CPPFLAGS) $(LUA_CPPFLAGS) $(ASIO_CPPFLAGS) -I $(DUSK_INCDIR) -I $(SRCDIR)
+LDFLAGS  += $(SFML_LDFLAGS)  $(LUA_LDFLAGS)  $(ASIO_LDFLAGS)  -L $(DUSK_LIBDIR)
 LDLIBS   += $(SFML_LDLIBS)   $(LUA_LDLIBS)   $(ASIO_LDLIBS) -l X11
 
 all: $(OUT) includes
@@ -19,37 +15,28 @@ all: $(OUT) includes
 clean:
 	rm -f $(OBJ)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
-	@mkdir -p $(dir $@) >/dev/null
-	$(CXX) -c $(CPPFLAGS) -o $@ $<
+$(OBJDIR)/%.o : $(SRCDIR)/%.cpp
+$(OBJDIR)/%.o : $(SRCDIR)/%.cpp $(DEPDIR)/%.d
+	@mkdir -p $(dir $(DEPDIR)/$*.d) >/dev/null;
+	$(MAKEDEPEND)
+	@mkdir -p $(dir $@) >/dev/null;
+	$(COMPILE)
 
 $(OUT): CPPFLAGS += -fPIC
 $(OUT): $(OBJ)
-	@mkdir -p $(dir $@) >/dev/null
-	$(CXX) $(LDFLAGS) -o $@ -shared $^ $(LDLIBS)
+	@mkdir -p $(dir $@) >/dev/null;
+	$(LINK)
 
 # Includes
 
 includes:
 	$(info Copying Includes)
-	@mkdir -p $(OUT_DIR)include
-	@-cp -rf include/* $(OUT_DIR)include
-	@cd $(SRC_DIR); find -type f -name '*.hpp' | cpio -updm ../$(OUT_DIR)include
+	@mkdir -p $(OUTDIR)/include
+	@-cp -rf include/* $(OUTDIR)/include
+	cd $(SRCDIR); find -type f -name '*.hpp' -exec cp {} $(OUTDIR)/include \;
+	cd $(DUSK_INCDIR); find -type f -name '*.hpp' -exec cp {} $(OUTDIR)/include \;
 
-# Testing
+$(DEPDIR)/%.d: ;
+.PRECIOUS: $(DEPDIR)/%.d
 
-include make/gtest.mk
-
-TEST_DIR = tests/
-TEST_SRC = $(wildcard $(TEST_DIR)*.cpp)
-TEST_OUT = $(OUT_DIR)Test
-
-$(TEST_OUT): $(OBJS) $(TEST_SRC)
-	@mkdir -p $(dir $@)
-	$(CXX) $(CPPFLAGS) $(LDFLAGS) -o $(TEST_OUT) $(TEST_SRC) $(OBJ) $(LDLIBS)
-
-test: CPPFLAGS += $(GTEST_CPPFLAGS) -I $(SRC_DIR)
-test: LDFLAGS  += $(GTEST_LDFLAGS)
-test: LDLIBS   += $(GTEST_LDLIBS)
-test: gtest $(TEST_OUT)
-	cd $(TEST_DIR); $(TEST_OUT)
+-include $(SRC:$(SRCDIR)/%.cpp=$(DEPDIR)/%.d)

@@ -1,63 +1,55 @@
 #ifndef DUSK_GRAPHICS_SPRITE_HPP
 #define DUSK_GRAPHICS_SPRITE_HPP
 
-#include <Dusk/Tracking/TrackedObject.hpp>
+#include <Dusk/Graphics/Actor.hpp>
+#include <Dusk/Graphics/Texture.hpp>
 #include <Dusk/Geometry/Rect.hpp>
 #include <Dusk/Geometry/Vector2.hpp>
+#include <Dusk/Scripting/Scripting.hpp>
+#include <Dusk/Types.hpp>
 
-#include <lua.hpp>
-#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 namespace dusk
 {
 
-class Texture;
-class GraphicsContext;
-
-class Sprite : public TrackedObject
+class Sprite : public Actor
 {
-
-    friend class GraphicsContext;
-
 public:
-    inline Sprite()
-        : mp_Texture(nullptr)
-        , m_Rect()
+    DUSK_CLASSNAME("Sprite")
+
+    inline Sprite(shared_ptr<Texture> pTexture)
+        : mp_Texture(pTexture)
         , m_SfSprite()
     {
+        m_SfSprite.setTexture(mp_Texture->GetSFMLTexture());
     }
 
-    virtual inline ~Sprite() { Term(); }
+    virtual inline ~Sprite() = default;
 
-    virtual inline string GetClassName() const { return "Sprite"; }
+    virtual inline Vector2f GetPosition() const override { return m_SfSprite.getPosition(); }
+    virtual inline void SetPosition(const Vector2f& pos) override { m_SfSprite.setPosition(pos); }
 
-    bool Init(Texture* pTexture, IntRect rect = IntRect(0, 0, 0, 0));
+    virtual inline Vector2f GetScale() const override { return m_SfSprite.getScale(); }
+    virtual inline void SetScale(const Vector2f& scale) override { m_SfSprite.setScale(scale); }
 
-    void Term();
+    virtual inline float GetRotation() const override { return m_SfSprite.getRotation(); }
+    virtual inline void SetRotation(const float& rot) override { m_SfSprite.setRotation(rot); }
 
-    inline Vector2f GetPos() const { return m_SfSprite.getPosition(); }
+    inline Color GetColor() const override { return m_SfSprite.getColor(); }
+    inline void SetColor(const Color& color) override { m_SfSprite.setColor(color); };
 
-    inline void SetPos(const float& x, const float& y)
-    {
-        m_SfSprite.setPosition(sf::Vector2f(x, y));
-    }
+    virtual void Draw(GraphicsContext* pCtx) override;
 
     inline const sf::Sprite& GetSFMLSprite() const { return m_SfSprite; }
 
 private:
-    Texture* mp_Texture;
-
-    IntRect m_Rect;
+    shared_ptr<Texture> mp_Texture;
 
     sf::Sprite m_SfSprite;
 
 public:
-    static void Script_RegisterFunctions();
-    static int Script_New(lua_State* L);
-    static int Script_Delete(lua_State* L);
-    static int Script_GetPos(lua_State* L);
-    static int Script_SetPos(lua_State* L);
+    static void Script_RegisterFunctions() { }
 
 }; // class Sprite
 

@@ -16,8 +16,10 @@ UIElement::UIElement() { UpdateLayout(); }
 UIElement::~UIElement()
 {
     if (auto pRelativeTo = m_RelativeTo.lock())
+    {
         pRelativeTo->RemoveEventListener(
             EvtLayoutChange, this, &UIElement::OnRelativeToLayoutChange);
+    }
 }
 
 void
@@ -33,7 +35,7 @@ UIElement::Inherit(const UIElement* pInheritFrom)
     m_BorderSize = pInheritFrom->m_BorderSize;
     m_BorderColor = pInheritFrom->m_BorderColor;
     m_Font = pInheritFrom->m_Font;
-    m_TextBuffer = pInheritFrom->m_TextBuffer;
+    m_SpriteText = pInheritFrom->m_SpriteText;
 
     UpdateLayout();
 }
@@ -82,8 +84,8 @@ UIElement::OnRender(const Event& evt)
         pData->GetContext()->Draw(borderRect);
     }
 
-    m_TextBuffer.SetPos(m_Pos);
-    pData->GetContext()->Draw(&m_TextBuffer);
+    m_SpriteText.SetPosition(m_Pos);
+    pData->GetContext()->Draw(&m_SpriteText);
 
     for (auto& child : m_Children)
         child->OnRender(evt);
@@ -313,7 +315,7 @@ UIElement::SetFont(UIFont* pFont, const UIState& state /*= UIState::StateDefault
 void
 UIElement::SetText(const string& text)
 {
-    m_TextBuffer.SetText(text);
+    m_SpriteText.SetText(text);
     UpdateLayout();
 }
 
@@ -329,9 +331,9 @@ UIElement::UpdateStateData()
     UIFont* pUIFont = m_Font.GetValue(m_State);
     if (pUIFont)
     {
-        m_TextBuffer.SetFont(pUIFont->GetFont());
-        m_TextBuffer.SetFontSize(pUIFont->GetFontSize());
-        m_TextBuffer.SetColor(pUIFont->GetColor());
+        m_SpriteText.SetFont(pUIFont->GetFont());
+        m_SpriteText.SetFontSize(pUIFont->GetFontSize());
+        m_SpriteText.SetColor(pUIFont->GetColor());
         UpdateLayout();
     }
 }
@@ -382,7 +384,7 @@ UIElement::UpdateLayout()
     if (auto pParent = mp_Parent.lock())
         parentSize = pParent->GetSize();
 
-    Vector2f textSize = m_TextBuffer.GetSize();
+    Vector2f textSize = m_SpriteText.GetSize();
 
     if (m_TargetSize.x == FLT_MIN)
     {
@@ -561,7 +563,7 @@ UIElement::Script_SetSize(lua_State* L)
             size.x = FLT_MIN;
         }
 
-    else if (xStr == "max")
+        else if (xStr == "max")
         {
             size.x = FLT_MAX;
         }

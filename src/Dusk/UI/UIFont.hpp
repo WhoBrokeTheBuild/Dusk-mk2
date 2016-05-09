@@ -12,14 +12,14 @@ namespace dusk
 class UIFont : public TrackedObject
 {
 public:
+    DUSK_CLASSNAME("UI Font")
+
     inline UIFont()
         : mp_Font(nullptr)
     {
     }
 
     virtual inline ~UIFont() {}
-
-    virtual inline string GetClassName() const override { return "UI Font"; }
 
     inline void Inherit(const UIFont* pInheritFrom)
     {

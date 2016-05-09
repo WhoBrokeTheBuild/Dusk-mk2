@@ -28,8 +28,6 @@ public:
     EventDispatcher();
     virtual ~EventDispatcher();
 
-    virtual inline string GetClassName() const { return "Event Dispatcher"; }
-
     void AddEventListener(const EventID& eventId, const EventDelegate& funcDelegate);
     void RemoveEventListener(const EventID& eventId, const EventDelegate& funcDelegate);
 

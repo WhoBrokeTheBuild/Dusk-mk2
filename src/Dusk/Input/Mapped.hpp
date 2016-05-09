@@ -11,12 +11,12 @@ typedef string MappedInputID;
 class MappedInputEventData : public EventData
 {
 public:
+    DUSK_CLASSNAME("Mapped Input Event Data")
+
     MappedInputEventData(const MappedInputID& mappedInput)
         : m_MappedInput(mappedInput)
     {
     }
-
-    virtual inline string GetClassName() const override { return "Mapped Input Event Data"; }
 
     virtual inline EventData* Clone() const override
     {

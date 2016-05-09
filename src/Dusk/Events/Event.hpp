@@ -18,6 +18,8 @@ class EventDispatcher;
 class EventData : public TrackedObject
 {
 public:
+    DUSK_CLASSNAME("Event Data")
+
     static const EventData BlankEventData;
 
     inline EventData() {}
@@ -25,8 +27,6 @@ public:
     inline EventData(const EventData& rhs) {}
 
     virtual inline ~EventData() {}
-
-    virtual inline string GetClassName() const { return "Event Data"; }
 
     virtual EventData* Clone() const { return New EventData(); };
 
@@ -37,6 +37,8 @@ public:
 class Event : public TrackedObject
 {
 public:
+    DUSK_CLASSNAME("Event")
+
     Event(const EventID& eventId, const EventData& data = EventData::BlankEventData)
         : m_ID(eventId)
         , m_Data(nullptr)
@@ -56,8 +58,6 @@ public:
     virtual inline ~Event() { delete m_Data; }
 
     virtual int PushDataToLua(lua_State* L) const;
-
-    virtual inline string GetClassName() const override { return "Event"; }
 
     inline EventID GetID() const { return m_ID; }
 

@@ -23,6 +23,8 @@ class GraphicsSystem : public TrackedObject, public EventDispatcher
     friend class Program;
 
 public:
+    DUSK_CLASSNAME("Graphics System")
+
     enum WindowStyle : uint8_t
     {
         Fullscreen = 1,
@@ -40,8 +42,6 @@ public:
     GraphicsSystem(const GraphicsSystem&) = delete;
     GraphicsSystem& operator=(const GraphicsSystem&) = delete;
     virtual ~GraphicsSystem() = default;
-
-    virtual inline string GetClassName() const override { return "Graphics System"; }
 
     bool CreateWindow();
 

@@ -7,6 +7,8 @@
 namespace dusk
 {
 
+#define DUSK_CLASSNAME(NAME) virtual inline string GetClassName() const override { return NAME; }
+
 class TrackedObject
 {
 public:

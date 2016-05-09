@@ -43,21 +43,21 @@ template <typename ReturnType, typename Param = void>
 class FunctionCallback : public ICallback<ReturnType, Param>
 {
 public:
+    DUSK_CLASSNAME("Function Callback")
+
     FunctionCallback(ReturnType (*pFunction)(Param))
         : mp_Function(pFunction)
     {
     }
 
-    virtual inline string GetClassName() const { return "Function Callback"; }
+    inline virtual ReturnType Invoke(Param param) override { return (*mp_Function)(param); }
 
-    inline virtual ReturnType Invoke(Param param) { return (*mp_Function)(param); }
+    inline virtual FunctionCallback* Clone() override { return New FunctionCallback(mp_Function); }
 
-    inline virtual FunctionCallback* Clone() { return New FunctionCallback(mp_Function); }
-
-    inline virtual bool IsMethodOf(void* pObject) { return false; }
+    inline virtual bool IsMethodOf(void* pObject) override { return false; }
 
 protected:
-    virtual bool IsEqualTo(const ICallback<ReturnType, Param>& rhs) const
+    virtual bool IsEqualTo(const ICallback<ReturnType, Param>& rhs) const override
     {
         if (const FunctionCallback<ReturnType, Param>* pConvert
             = dynamic_cast<const FunctionCallback<ReturnType, Param>*>(&rhs))
@@ -77,25 +77,25 @@ template <typename ReturnType, typename Param = void, typename ObjectType = void
 class MethodCallback : public ICallback<ReturnType, Param>
 {
 public:
+    DUSK_CLASSNAME("Method Callback")
+
     MethodCallback(void* pObject, Method method)
         : m_Method(method)
         , mp_Object(pObject)
     {
     }
 
-    virtual inline string GetClassName() const { return "Method Callback"; }
-
-    inline virtual ReturnType Invoke(Param param)
+    inline virtual ReturnType Invoke(Param param) override
     {
         return (static_cast<ObjectType*>(mp_Object)->*m_Method)(param);
     }
 
-    inline virtual MethodCallback* Clone() { return New MethodCallback(mp_Object, m_Method); }
+    inline virtual MethodCallback* Clone() override { return New MethodCallback(mp_Object, m_Method); }
 
-    inline virtual bool IsMethodOf(void* pObject) { return mp_Object == pObject; }
+    inline virtual bool IsMethodOf(void* pObject) override { return mp_Object == pObject; }
 
 protected:
-    virtual bool IsEqualTo(const ICallback<ReturnType, Param>& rhs) const
+    virtual bool IsEqualTo(const ICallback<ReturnType, Param>& rhs) const override
     {
         if (const MethodCallback<ReturnType, Param, ObjectType, Method>* pConvert
             = dynamic_cast<const MethodCallback<ReturnType, Param, ObjectType, Method>*>(&rhs))
@@ -114,21 +114,21 @@ private:
 class LuaFucntionCallback : public ICallback<void, const Event&>
 {
 public:
+    DUSK_CLASSNAME("Lua Function Callback")
+
     LuaFucntionCallback(ScriptHost* pScriptHost, const string& callback);
 
-    virtual inline string GetClassName() const { return "Lua Function Callback"; }
+    virtual void Invoke(const Event& event) override;
 
-    virtual void Invoke(const Event& event);
-
-    inline virtual LuaFucntionCallback* Clone()
+    inline virtual LuaFucntionCallback* Clone() override
     {
         return New LuaFucntionCallback(mp_ScriptHost, m_Callback);
     }
 
-    inline virtual bool IsMethodOf(void* pObject) { return false; }
+    inline virtual bool IsMethodOf(void* pObject) override { return false; }
 
 protected:
-    virtual bool IsEqualTo(const ICallback<void, const Event&>& rhs) const;
+    virtual bool IsEqualTo(const ICallback<void, const Event&>& rhs) const override;
 
 private:
     ScriptHost* mp_ScriptHost;

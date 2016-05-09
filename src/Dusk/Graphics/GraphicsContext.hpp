@@ -10,7 +10,7 @@ namespace dusk
 
 class GraphicsSystem;
 class Sprite;
-class TextBuffer;
+class SpriteText;
 
 class GraphicsContext : public TrackedObject
 {
@@ -18,20 +18,20 @@ class GraphicsContext : public TrackedObject
     friend class GraphicsSystem;
 
 public:
+    DUSK_CLASSNAME("Graphics Context")
+
     GraphicsContext() = delete;
     GraphicsContext(const GraphicsContext&) = delete;
     GraphicsContext& operator=(const GraphicsContext&) = delete;
 
     ~GraphicsContext() = default;
-
-    virtual inline string GetClassName() const override { return "Graphics Context"; }
-
+    
     void Clear();
     void SwapBuffers();
 
     void Draw(const sf::Drawable& drawable);
     void Draw(Sprite* sprite);
-    void Draw(TextBuffer* textBuffer);
+    void Draw(SpriteText* text);
 
     inline sf::RenderWindow& GetSFMLWindow() { return m_SfWindow; }
 

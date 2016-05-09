@@ -13,6 +13,8 @@ template <typename ReturnType, typename Param = void>
 class Delegate : public TrackedObject
 {
 public:
+    DUSK_CLASSNAME("Delegate")
+
     Delegate(ReturnType (*pFunction)(Param))
     {
         mp_Callback = New FunctionCallback<ReturnType, Param>(pFunction);
@@ -36,8 +38,6 @@ public:
         delete mp_Callback;
         mp_Callback = nullptr;
     }
-
-    virtual inline string GetClassName() const { return "Delegate"; }
 
     inline ReturnType Invoke(Param param) { return mp_Callback->Invoke(param); }
     inline ReturnType operator()(Param param) { return Invoke(param); }

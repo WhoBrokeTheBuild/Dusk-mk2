@@ -9,22 +9,22 @@
 namespace dusk
 {
 
-class TextBuffer;
+class SpriteText;
 
 class Font : public TrackedObject
 {
 
-    friend class TextBuffer;
+    friend class SpriteText;
 
 public:
+    DUSK_CLASSNAME("Font")
+
     Font() = default;
     Font(const Font&) = default;
     Font& operator=(const Font&) = default;
     virtual ~Font() = default;
 
     inline Font(const string& filename) { Load(filename); }
-
-    virtual inline string GetClassName() const override { return "Font"; }
 
     bool Load(const string& filename);
 

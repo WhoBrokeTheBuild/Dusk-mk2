@@ -18,14 +18,14 @@ class Texture : public TrackedObject
     friend class Sprite;
 
 public:
+    DUSK_CLASSNAME("Texture")
+
     Texture() = default;
     Texture(const Texture&) = default;
     Texture& operator=(const Texture&) = default;
     virtual ~Texture() = default;
 
     inline Texture(const string& filename) { Load(filename); }
-
-    virtual inline string GetClassName() const override { return "Texture"; }
 
     bool Load(const string& filename);
 

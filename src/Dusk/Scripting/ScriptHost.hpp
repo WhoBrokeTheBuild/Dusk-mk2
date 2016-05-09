@@ -12,12 +12,12 @@ namespace dusk
 class ScriptHost : public TrackedObject
 {
 public:
+    DUSK_CLASSNAME("ScriptHost")
+
     ScriptHost();
     ScriptHost(const ScriptHost&) = delete;
     ScriptHost& operator=(const ScriptHost&) = delete;
     virtual ~ScriptHost();
-
-    virtual inline string GetClassName() const override { return "Script Host"; }
 
     bool RunFile(const string& filename);
     bool RunString(const string& code);

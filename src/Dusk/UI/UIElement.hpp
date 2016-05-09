@@ -6,7 +6,7 @@
 #include <Dusk/Geometry/Vector2.hpp>
 #include <Dusk/Geometry/Rect.hpp>
 #include <Dusk/Graphics/Color.hpp>
-#include <Dusk/Graphics/TextBuffer.hpp>
+#include <Dusk/Graphics/SpriteText.hpp>
 #include <Dusk/Collections/Map.hpp>
 #include <Dusk/Collections/ArrayList.hpp>
 #include <Dusk/UI/UIFont.hpp>
@@ -200,7 +200,7 @@ public:
     }
     virtual void SetFont(UIFont* pFont, const UIState& state = UIState::Default);
 
-    virtual string GetText() const { return m_TextBuffer.GetText(); }
+    virtual string GetText() const { return m_SpriteText.GetText(); }
     virtual void SetText(const string& text);
 
     virtual ArrayList<shared_ptr<UIElement>>& GetChildren() { return m_Children; }
@@ -239,7 +239,7 @@ private:
     StateProp<Color> m_BorderColor;
     StateProp<UIFont*> m_Font;
 
-    TextBuffer m_TextBuffer;
+    SpriteText m_SpriteText;
 
     weak_ptr<UIElement> mp_Parent;
     ArrayList<shared_ptr<UIElement>> m_Children;

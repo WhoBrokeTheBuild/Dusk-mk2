@@ -23,6 +23,8 @@ class InputSystem : public EventDispatcher, public TrackedObject
     friend class GraphicsSystem;
 
 public:
+    DUSK_CLASSNAME("Input System")
+
     enum : EventID
     {
         EvtKeyPress = 1,
@@ -43,8 +45,6 @@ public:
     InputSystem& operator=(const InputSystem&) = delete;
 
     virtual ~InputSystem() = default;
-
-    virtual inline string GetClassName() const { return "Input System"; }
 
     void MapKey(const MappedInputID& id, const Keyboard::Key& key);
     void MapMouseButton(const MappedInputID& id, const Mouse::Button& button);
