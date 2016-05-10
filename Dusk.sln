@@ -10,6 +10,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloWorld", "examples\Hell
 		{735BA286-3D93-4A18-9FE2-81D2A7F81A01} = {735BA286-3D93-4A18-9FE2-81D2A7F81A01}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{948FF2FE-642F-4C40-B424-4B1FFD1245AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -37,5 +39,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C28E9814-A361-4B68-8A9A-BF2D7559F66D} = {948FF2FE-642F-4C40-B424-4B1FFD1245AD}
 	EndGlobalSection
 EndGlobal
