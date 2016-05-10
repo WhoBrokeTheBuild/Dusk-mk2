@@ -1,6 +1,8 @@
 #ifndef DUSK_TYPES_HPP
 #define DUSK_TYPES_HPP
 
+#include <Dusk/Config.hpp>
+
 #include <string>
 using std::string;
 

@@ -25,6 +25,10 @@
 *.out
 *.app
 
+# Visual Studio
+*.VC.*
+.vs
+
 .dep
 obj
 build

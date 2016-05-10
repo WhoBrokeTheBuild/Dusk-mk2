@@ -1,6 +1,7 @@
 #ifndef DUSK_GRAPHICS_TEXTURE_HPP
 #define DUSK_GRAPHICS_TEXTURE_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 #include <Dusk/Types.hpp>
 

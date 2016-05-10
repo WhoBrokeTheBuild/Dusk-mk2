@@ -1,6 +1,7 @@
 #ifndef DUSK_UI_UI_MANAGER_HPP
 #define DUSK_UI_UI_MANAGER_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 #include <Dusk/Collections/Map.hpp>
 #include <Dusk/Graphics/Font.hpp>

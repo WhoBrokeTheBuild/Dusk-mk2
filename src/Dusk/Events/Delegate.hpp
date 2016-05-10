@@ -1,6 +1,7 @@
 #ifndef DUSK_DELEGATE_HPP
 #define DUSK_DELEGATE_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 #include <Dusk/Events/Callbacks.hpp>
 

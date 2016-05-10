@@ -1,6 +1,7 @@
 #ifndef DUSK_TRACKING_TRACKED_OBJECT_HPP
 #define DUSK_TRACKING_TRACKED_OBJECT_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Platform.hpp>
 #include <Dusk/Types.hpp>
 

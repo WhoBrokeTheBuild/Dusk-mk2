@@ -1,6 +1,7 @@
 #ifndef DUSK_SCRIPTING_SCRIPTING_SYSTEM_HPP
 #define DUSK_SCRIPTING_SCRIPTING_SYSTEM_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Types.hpp>
 #include <Dusk/Collections/Map.hpp>
 #include <Dusk/Collections/ArrayList.hpp>

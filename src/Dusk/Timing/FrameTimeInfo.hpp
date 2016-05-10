@@ -1,6 +1,8 @@
 #ifndef DUSK_TIMING_TIME_INFO_HPP
 #define DUSK_TIMING_TIME_INFO_HPP
 
+#include <Dusk/Config.hpp>
+
 namespace dusk
 {
 

@@ -1,6 +1,7 @@
 #ifndef DUSK_GRAPHICS_CURSOR_HPP
 #define DUSK_GRAPHICS_CURSOR_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Platform.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>

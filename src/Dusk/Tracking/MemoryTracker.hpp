@@ -1,6 +1,7 @@
 #ifndef DUSK_TRACKING_MEMORY_TRACKER_H
 #define DUSK_TRACKING_MEMORY_TRACKER_H
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Collections/Map.hpp>
 #include <Dusk/Types.hpp>
 

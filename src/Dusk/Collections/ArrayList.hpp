@@ -1,6 +1,7 @@
 #ifndef DUSK_COLLECTIONS_ARRAY_LIST_HPP
 #define DUSK_COLLECTIONS_ARRAY_LIST_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 
 #include <vector>

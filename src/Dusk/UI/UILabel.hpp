@@ -1,6 +1,7 @@
 #ifndef DUSK_UI_UI_LABEL_HPP
 #define DUSK_UI_UI_LABEL_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/UI/UIElement.hpp>
 
 namespace dusk

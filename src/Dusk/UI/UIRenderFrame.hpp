@@ -1,6 +1,7 @@
 #ifndef DUSK_UI_RENDER_FRAME_HPP
 #define DUSK_UI_RENDER_FRAME_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/UI/UIFrame.hpp>
 
 namespace dusk

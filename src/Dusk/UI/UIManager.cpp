@@ -602,7 +602,7 @@ UIManager::ParseInput(rapidxml::xml_node<>* node, shared_ptr<UIInput>& pInput)
     if (maxLenAttr)
     {
         const string& maxLenStr = maxLenAttr->value();
-        size_t maxLen = std::stoull(maxLenStr);
+        size_t maxLen = (size_t)std::stoull(maxLenStr);
         pInput->SetMaxLength(maxLen);
     }
 

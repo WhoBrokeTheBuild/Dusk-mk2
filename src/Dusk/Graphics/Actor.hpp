@@ -1,6 +1,7 @@
 #ifndef DUSK_GRAPHICS_ACTOR_HPP
 #define DUSK_GRAPHICS_ACTOR_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 #include <Dusk/Geometry/Vector2.hpp>
 #include <Dusk/Graphics/Color.hpp>

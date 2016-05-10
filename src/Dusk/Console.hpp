@@ -1,6 +1,7 @@
 #ifndef DUSK_UTILITY_CONSOLE_HPP
 #define DUSK_UTILITY_CONSOLE_HPP
 
+#include <Dusk/Config.hpp>
 #include <iostream>
 #include <string>
 

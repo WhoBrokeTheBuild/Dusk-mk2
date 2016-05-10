@@ -1,6 +1,7 @@
 #ifndef DUSK_GEOMETRY_RECT_HPP
 #define DUSK_GEOMETRY_RECT_HPP
 
+#include <Dusk/Config.hpp>
 #include <SFML/Graphics/Rect.hpp>
 
 namespace dusk

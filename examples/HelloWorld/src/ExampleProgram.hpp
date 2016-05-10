@@ -2,6 +2,7 @@
 #define EXAMPLE_PROGRAM_HPP
 
 #include <memory>
+#include <Dusk/Config.hpp>
 #include <Dusk/Program.hpp>
 #include <Dusk/Graphics/SpriteText.hpp>
 #include <Dusk/Graphics/Font.hpp>

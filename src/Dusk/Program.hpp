@@ -1,6 +1,7 @@
 #ifndef DUSK_PROGRAM_H
 #define DUSK_PROGRAM_H
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Events/EventDispatcher.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 #include <Dusk/Graphics/GraphicsSystem.hpp>

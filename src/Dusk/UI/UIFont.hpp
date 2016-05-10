@@ -1,6 +1,7 @@
 #ifndef DUSK_UI_UI_FONT_HPP
 #define DUSK_UI_UI_FONT_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 #include <Dusk/Graphics/Color.hpp>
 #include <Dusk/Graphics/Font.hpp>

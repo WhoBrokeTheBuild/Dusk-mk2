@@ -1,6 +1,7 @@
 #ifndef DUSK_INPUT_MAPPED_INPUT_EVENT_DATA_HPP
 #define DUSK_INPUT_MAPPED_INPUT_EVENT_DATA_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Events/Event.hpp>
 
 namespace dusk

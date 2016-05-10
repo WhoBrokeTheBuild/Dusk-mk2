@@ -1,6 +1,7 @@
 #ifndef DUSK_GEOMETRY_VECTOR_2_HPP
 #define DUSK_GEOMETRY_VECTOR_2_HPP
 
+#include <Dusk/Config.hpp>
 #include <SFML/System/Vector2.hpp>
 
 namespace dusk

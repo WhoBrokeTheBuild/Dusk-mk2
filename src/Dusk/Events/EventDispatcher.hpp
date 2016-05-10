@@ -1,6 +1,7 @@
 #ifndef DUSK_EVENT_DISPATCHER_HPP
 #define DUSK_EVENT_DISPATCHER_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Collections/ArrayList.hpp>
 #include <Dusk/Collections/HashMap.hpp>
 #include <Dusk/Events/Event.hpp>

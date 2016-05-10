@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{735BA286-3D93-4A18-9FE2-81D2A7F81A01}</ProjectGuid>
+    <RootNamespace>Dusk</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)include;$(SolutionDir)src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib\x86;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(ProjectDir)src;$(SourcePath)</SourcePath>
+    <OutDir>$(ProjectDir)build\$(Configuration)\x86\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Configuration)\x86\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir)include;$(SolutionDir)src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib\x86;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(ProjectDir)src;$(SourcePath)</SourcePath>
+    <OutDir>$(ProjectDir)build\$(Configuration)\x86\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Configuration)\x86\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)include;$(SolutionDir)src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib\x64;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(ProjectDir)src;$(SourcePath)</SourcePath>
+    <OutDir>$(ProjectDir)build\$(Configuration)\x64\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Configuration)\x64\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)include;$(SolutionDir)src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib\x64;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(ProjectDir)src;$(SourcePath)</SourcePath>
+    <OutDir>$(ProjectDir)build\$(Configuration)\x64\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Configuration)\x64\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Dusk\Audio\AudioSystem.cpp" />
+    <ClCompile Include="src\Dusk\Audio\Music.cpp" />
+    <ClCompile Include="src\Dusk\Audio\Sound.cpp" />
+    <ClCompile Include="src\Dusk\Events\Callbacks.cpp" />
+    <ClCompile Include="src\Dusk\Events\Event.cpp" />
+    <ClCompile Include="src\Dusk\Events\EventDispatcher.cpp" />
+    <ClCompile Include="src\Dusk\Graphics\Actor.cpp" />
+    <ClCompile Include="src\Dusk\Graphics\Cursor.cpp" />
+    <ClCompile Include="src\Dusk\Graphics\Font.cpp" />
+    <ClCompile Include="src\Dusk\Graphics\GraphicsContext.cpp" />
+    <ClCompile Include="src\Dusk\Graphics\GraphicsSystem.cpp" />
+    <ClCompile Include="src\Dusk\Graphics\Sprite.cpp" />
+    <ClCompile Include="src\Dusk\Graphics\SpriteText.cpp" />
+    <ClCompile Include="src\Dusk\Graphics\Texture.cpp" />
+    <ClCompile Include="src\Dusk\Input\InputSystem.cpp" />
+    <ClCompile Include="src\Dusk\Input\Keyboard.cpp" />
+    <ClCompile Include="src\Dusk\Input\Mapped.cpp" />
+    <ClCompile Include="src\Dusk\Input\Mouse.cpp" />
+    <ClCompile Include="src\Dusk\Logging\Loggers\ConsoleLogger.cpp" />
+    <ClCompile Include="src\Dusk\Logging\Loggers\FileLogger.cpp" />
+    <ClCompile Include="src\Dusk\Logging\Logging.cpp" />
+    <ClCompile Include="src\Dusk\Program.cpp" />
+    <ClCompile Include="src\Dusk\Scripting\ScriptHost.cpp" />
+    <ClCompile Include="src\Dusk\Scripting\Scripting.cpp" />
+    <ClCompile Include="src\Dusk\Strings.cpp" />
+    <ClCompile Include="src\Dusk\Tracking\MemoryTracker.cpp" />
+    <ClCompile Include="src\Dusk\Tracking\TrackedObject.cpp" />
+    <ClCompile Include="src\Dusk\UI\UIButton.cpp" />
+    <ClCompile Include="src\Dusk\UI\UIElement.cpp" />
+    <ClCompile Include="src\Dusk\UI\UIFrame.cpp" />
+    <ClCompile Include="src\Dusk\UI\UIInput.cpp" />
+    <ClCompile Include="src\Dusk\UI\UILabel.cpp" />
+    <ClCompile Include="src\Dusk\UI\UIManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Dusk\Config.hpp" />
+    <ClInclude Include="src\Dusk\Audio\AudioSystem.hpp" />
+    <ClInclude Include="src\Dusk\Audio\Music.hpp" />
+    <ClInclude Include="src\Dusk\Audio\Sound.hpp" />
+    <ClInclude Include="src\Dusk\Benchmark.hpp" />
+    <ClInclude Include="src\Dusk\Collections\ArrayList.hpp" />
+    <ClInclude Include="src\Dusk\Collections\HashMap.hpp" />
+    <ClInclude Include="src\Dusk\Collections\Map.hpp" />
+    <ClInclude Include="src\Dusk\Console.hpp" />
+    <ClInclude Include="src\Dusk\Events\Callbacks.hpp" />
+    <ClInclude Include="src\Dusk\Events\Delegate.hpp" />
+    <ClInclude Include="src\Dusk\Events\Event.hpp" />
+    <ClInclude Include="src\Dusk\Events\EventDispatcher.hpp" />
+    <ClInclude Include="src\Dusk\Geometry\Rect.hpp" />
+    <ClInclude Include="src\Dusk\Geometry\Vector2.hpp" />
+    <ClInclude Include="src\Dusk\Graphics\Actor.hpp" />
+    <ClInclude Include="src\Dusk\Graphics\Color.hpp" />
+    <ClInclude Include="src\Dusk\Graphics\Cursor.hpp" />
+    <ClInclude Include="src\Dusk\Graphics\Font.hpp" />
+    <ClInclude Include="src\Dusk\Graphics\GraphicsContext.hpp" />
+    <ClInclude Include="src\Dusk\Graphics\GraphicsSystem.hpp" />
+    <ClInclude Include="src\Dusk\Graphics\Sprite.hpp" />
+    <ClInclude Include="src\Dusk\Graphics\SpriteText.hpp" />
+    <ClInclude Include="src\Dusk\Graphics\Texture.hpp" />
+    <ClInclude Include="src\Dusk\Input\InputSystem.hpp" />
+    <ClInclude Include="src\Dusk\Input\Keyboard.hpp" />
+    <ClInclude Include="src\Dusk\Input\Mapped.hpp" />
+    <ClInclude Include="src\Dusk\Input\Mouse.hpp" />
+    <ClInclude Include="src\Dusk\Logging\LogColors.hpp" />
+    <ClInclude Include="src\Dusk\Logging\Logger.hpp" />
+    <ClInclude Include="src\Dusk\Logging\Loggers\ConsoleLogger.hpp" />
+    <ClInclude Include="src\Dusk\Logging\Loggers\FileLogger.hpp" />
+    <ClInclude Include="src\Dusk\Logging\Logging.hpp" />
+    <ClInclude Include="src\Dusk\Main.hpp" />
+    <ClInclude Include="src\Dusk\Platform.hpp" />
+    <ClInclude Include="src\Dusk\Program.hpp" />
+    <ClInclude Include="src\Dusk\Scripting\ScriptHost.hpp" />
+    <ClInclude Include="src\Dusk\Scripting\Scripting.hpp" />
+    <ClInclude Include="src\Dusk\Strings.hpp" />
+    <ClInclude Include="src\Dusk\Timing\FrameTimeInfo.hpp" />
+    <ClInclude Include="src\Dusk\Tracking\MemoryTracker.hpp" />
+    <ClInclude Include="src\Dusk\Tracking\TrackedObject.hpp" />
+    <ClInclude Include="src\Dusk\Types.hpp" />
+    <ClInclude Include="src\Dusk\UI\UIButton.hpp" />
+    <ClInclude Include="src\Dusk\UI\UIElement.hpp" />
+    <ClInclude Include="src\Dusk\UI\UIFont.hpp" />
+    <ClInclude Include="src\Dusk\UI\UIFrame.hpp" />
+    <ClInclude Include="src\Dusk\UI\UIInput.hpp" />
+    <ClInclude Include="src\Dusk\UI\UILabel.hpp" />
+    <ClInclude Include="src\Dusk\UI\UIManager.hpp" />
+    <ClInclude Include="src\Dusk\UI\UIRenderFrame.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -3,6 +3,7 @@
 
 /// \cond HIDDEN
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 #include <Dusk/Logging/LogColors.hpp>
 

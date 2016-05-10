@@ -1,6 +1,7 @@
 #ifndef DUSK_LOGGING_FILE_LOGGER_HPP
 #define DUSK_LOGGING_FILE_LOGGER_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Logging/Logger.hpp>
 #include <Dusk/Collections/Map.hpp>
 #include <Dusk/Collections/ArrayList.hpp>

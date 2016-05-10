@@ -165,7 +165,7 @@ InputSystem::ProcessSfEvent(const sf::Event& sfEvent)
     }
     else if (sfEvent.type == sf::Event::MouseMoved)
     {
-        TriggerMouseMoveAbsolute(sfEvent.mouseMove.x, sfEvent.mouseMove.y);
+        TriggerMouseMoveAbsolute((float)sfEvent.mouseMove.x, (float)sfEvent.mouseMove.y);
     }
     else if (sfEvent.type == sf::Event::TextEntered)
     {

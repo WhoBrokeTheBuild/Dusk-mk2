@@ -1,6 +1,7 @@
 #ifndef DUSK_UI_UI_ELEMENT_HPP
 #define DUSK_UI_UI_ELEMENT_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 #include <Dusk/Events/EventDispatcher.hpp>
 #include <Dusk/Geometry/Vector2.hpp>

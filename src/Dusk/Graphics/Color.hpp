@@ -1,6 +1,7 @@
 #ifndef DUSK_GRAPHICS_COLOR_HPP
 #define DUSK_GRAPHICS_COLOR_HPP
 
+#include <Dusk/Config.hpp>
 #include <SFML/Graphics/Color.hpp>
 
 namespace dusk

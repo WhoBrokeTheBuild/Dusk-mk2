@@ -1,6 +1,7 @@
 #ifndef DUSK_AUDIO_MUSIC_HPP
 #define DUSK_AUDIO_MUSIC_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 #include <Dusk/Events/EventDispatcher.hpp>
 

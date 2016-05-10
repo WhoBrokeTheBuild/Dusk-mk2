@@ -1,6 +1,7 @@
 #ifndef DUSK_GRAPHICS_SPRITE_TEXT_HPP
 #define DUSK_GRAPHICS_SPRITE_TEXT_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Graphics/Actor.hpp>
 #include <Dusk/Graphics/Color.hpp>
 #include <Dusk/Geometry/Vector2.hpp>

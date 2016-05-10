@@ -1,6 +1,7 @@
 #ifndef DUSK_EVENT_HPP
 #define DUSK_EVENT_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 
 #include <lua.hpp>

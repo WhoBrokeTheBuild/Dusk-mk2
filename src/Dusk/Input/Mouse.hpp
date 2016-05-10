@@ -1,6 +1,7 @@
 #ifndef DUSK_INPUT_MOUSE_BUTTON_HPP
 #define DUSK_INPUT_MOUSE_BUTTON_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Events/Event.hpp>
 #include <Dusk/Geometry/Vector2.hpp>
 

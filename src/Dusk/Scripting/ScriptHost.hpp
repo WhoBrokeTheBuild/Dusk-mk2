@@ -1,6 +1,7 @@
 #ifndef DUSK_SCRIPTING_SCRIPT_HOST_HPP
 #define DUSK_SCRIPTING_SCRIPT_HOST_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Types.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 

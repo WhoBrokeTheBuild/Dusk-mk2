@@ -1,6 +1,7 @@
 #ifndef DUSK_COLLECTIONS_MAP_HPP
 #define DUSK_COLLECTIONS_MAP_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 
 #include <map>

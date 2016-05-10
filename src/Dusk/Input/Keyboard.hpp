@@ -1,6 +1,7 @@
 #ifndef DUSK_INPUT_KEYS_HPP
 #define DUSK_INPUT_KEYS_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Collections/Map.hpp>
 #include <Dusk/Events/Event.hpp>
 

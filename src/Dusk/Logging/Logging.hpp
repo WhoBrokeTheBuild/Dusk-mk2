@@ -5,6 +5,7 @@
 
 /// \cond HIDDEN
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Collections/Map.hpp>
 #include <Dusk/Collections/ArrayList.hpp>
 #include <Dusk/Logging/LogColors.hpp>

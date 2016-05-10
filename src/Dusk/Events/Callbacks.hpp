@@ -1,6 +1,7 @@
 #ifndef DUSK_CALLBACKS_HPP
 #define DUSK_CALLBACKS_HPP
 
+#include <Dusk/Config.hpp>
 #include <Dusk/Tracking/TrackedObject.hpp>
 #include <Dusk/Events/Event.hpp>
 
