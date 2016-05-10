@@ -2,13 +2,20 @@
 
 include make/config.mk
 
+CXX = clang++
+
+OUTDIR = $(DUSK_OUTDIR)
+SRCDIR = src
+OBJDIR = obj
+DEPDIR = .dep
+
 SRC = $(shell find $(SRCDIR) -type f -name '*.cpp')
 OBJ = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRC))
 OUT = $(OUTDIR)/libDusk.so
 
-CPPFLAGS += $(SFML_CPPFLAGS) $(LUA_CPPFLAGS) $(ASIO_CPPFLAGS) -I $(DUSK_INCDIR) -I $(SRCDIR)
-LDFLAGS  += $(SFML_LDFLAGS)  $(LUA_LDFLAGS)  $(ASIO_LDFLAGS)  -L $(DUSK_LIBDIR)
-LDLIBS   += $(SFML_LDLIBS)   $(LUA_LDLIBS)   $(ASIO_LDLIBS) -l X11
+CPPFLAGS += $(SFML_CPPFLAGS) $(LUA_CPPFLAGS) $(ASIO_CPPFLAGS) -I$(DUSK_INCDIR) -I$(SRCDIR)
+LDFLAGS  += $(SFML_LDFLAGS)  $(LUA_LDFLAGS)  $(ASIO_LDFLAGS)  -L$(DUSK_LIBDIR)
+LDLIBS   += $(SFML_LDLIBS)   $(LUA_LDLIBS)   $(ASIO_LDLIBS) -lX11
 
 all: $(OUT) includes
 
@@ -18,14 +25,15 @@ clean:
 $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
 $(OBJDIR)/%.o : $(SRCDIR)/%.cpp $(DEPDIR)/%.d
 	@mkdir -p $(dir $(DEPDIR)/$*.d) >/dev/null;
-	$(MAKEDEPEND)
+	$(DUSK_MAKEDEPEND)
 	@mkdir -p $(dir $@) >/dev/null;
-	$(COMPILE)
+	$(DUSK_COMPILE)
 
 $(OUT): CPPFLAGS += -fPIC
+$(OUT): LDFLAGS += -shared
 $(OUT): $(OBJ)
 	@mkdir -p $(dir $@) >/dev/null;
-	$(LINK)
+	$(DUSK_LINK)
 
 # Includes
 

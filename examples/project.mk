@@ -1,9 +1,12 @@
 
-CXX = clang++
-
 include ../../make/config.mk
 
+CXX = clang++
+
 OUTDIR = build
+SRCDIR = src
+OBJDIR = obj
+DEPDIR = .dep
 
 SRC = $(shell find $(SRCDIR) -type f -name '*.cpp')
 OBJ = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRC))
@@ -24,10 +27,15 @@ run:
 $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
 $(OBJDIR)/%.o : $(SRCDIR)/%.cpp $(DEPDIR)/%.d
 	@mkdir -p $(dir $(DEPDIR)/$*.d) >/dev/null;
-	$(MAKEDEPEND)
+	$(DUSK_MAKEDEPEND)
 	@mkdir -p $(dir $@) >/dev/null;
-	$(COMPILE)
+	$(DUSK_COMPILE)
 
 $(OUT): $(OBJ)
 	@mkdir -p $(dir $@) >/dev/null;
-	$(LINK)
+	$(DUSK_LINK)
+
+$(DEPDIR)/%.d: ;
+.PRECIOUS: $(DEPDIR)/%.d
+
+-include $(SRC:$(SRCDIR)/%.cpp=$(DEPDIR)/%.d)
