@@ -7,6 +7,7 @@
 #include <Dusk/Events/Event.hpp>
 #include <Dusk/Scripting/ScriptHost.hpp>
 #include <Dusk/Input/InputSystem.hpp>
+#include <Dusk/Logging/Logging.hpp>
 
 #include <lua.hpp>
 

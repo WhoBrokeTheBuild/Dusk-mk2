@@ -148,6 +148,10 @@ GraphicsSystem::CreateSFMLWindow()
 
     m_SfWindow.setKeyRepeatEnabled(false);
 
+    Vector2u actualSize = m_SfWindow.getSize();
+    m_Width = actualSize.x;
+    m_Height = actualSize.y;
+
     return m_SfWindow.isOpen();
 }
 
