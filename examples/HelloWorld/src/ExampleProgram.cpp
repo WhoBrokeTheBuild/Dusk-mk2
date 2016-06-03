@@ -1,4 +1,5 @@
 #include "ExampleProgram.hpp"
+#include <random>
 
 ExampleProgram::ExampleProgram()
     : mp_Font(New Font("data/Roboto.ttf"))
@@ -6,6 +7,13 @@ ExampleProgram::ExampleProgram()
 {
     mp_Text->SetPosition(Vector2f(0, 0));
     m_TextVel = Vector2f(m_TextSpeed, m_TextSpeed);
+
+    GetInputSystem()->AddEventListener(InputSystem::EvtKeyPress, this, &ExampleProgram::OnKeyPress);
+}
+
+ExampleProgram::~ExampleProgram()
+{
+    GetInputSystem()->RemoveEventListener(InputSystem::EvtKeyPress, this, &ExampleProgram::OnKeyPress);
 }
 
 void
@@ -43,6 +51,26 @@ void
 ExampleProgram::Render(GraphicsContext *ctx)
 {
     Program::Render(ctx);
-    
+
     ctx->Draw(mp_Text.get());
+}
+
+void
+ExampleProgram::OnKeyPress(const Event& evt)
+{
+    KeyEventData* pData = evt.GetDataAs<KeyEventData>();
+    if (pData->GetKey() == Keyboard::Key::Space)
+    {
+        m_TextVel.x *= -1;
+        m_TextVel.y *= -1;
+    }
+    else if (pData->GetKey() == Keyboard::Key::Enter)
+    {
+        std::random_device rd;
+        std::mt19937 mt(rd());
+        std::uniform_real_distribution<double> dist(-m_TextSpeed, m_TextSpeed);
+
+        m_TextVel.x = dist(mt);
+        m_TextVel.y = dist(mt);
+    }
 }

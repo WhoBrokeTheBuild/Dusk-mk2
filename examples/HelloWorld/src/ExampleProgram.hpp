@@ -18,10 +18,12 @@ public:
     ExampleProgram(const ExampleProgram&) = delete;
     ExampleProgram& operator=(const ExampleProgram&) = delete;
     ExampleProgram();
-    ~ExampleProgram() = default;
+    ~ExampleProgram();
 
     void Update(FrameTimeInfo& time) override;
     void Render(GraphicsContext* ctx) override;
+
+    void OnKeyPress(const Event& evt);
 
 private:
     unique_ptr<Font> mp_Font;
