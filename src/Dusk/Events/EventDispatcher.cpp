@@ -208,8 +208,8 @@ EventDispatcher::CleanMap()
 void
 EventDispatcher::Script_RegisterFunctions()
 {
-    Scripting::RegisterFunction(
-        "dusk_event_dispatcher_add_event_listener", &EventDispatcher::Script_AddEventListener);
+    Scripting::RegisterFunction("dusk_event_dispatcher_add_event_listener",
+        &EventDispatcher::Script_AddEventListener);
     Scripting::RegisterFunction("dusk_event_dispatcher_remove_event_listener",
         &EventDispatcher::Script_RemoveEventListener);
 }

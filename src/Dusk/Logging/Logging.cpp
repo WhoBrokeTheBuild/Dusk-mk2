@@ -165,7 +165,6 @@ Logging::AddFileLogger(const string& level, const string& filename)
 void
 Logging::Script_RegisterFunctions()
 {
-    Scripting::RegisterFunction("DuskLog", &Logging::Script_Log);
     Scripting::RegisterFunction("dusk_log", &Logging::Script_Log);
 }
 

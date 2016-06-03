@@ -36,7 +36,7 @@ DuskMain(int argc, char* argv[])
     Logging::AddFileLogger("verbose", "info.log");
 
     Logging::SetLevelForegroundColor("error", dusk::LogForegroundColor::LOG_FG_RED);
-    Logging::SetLevelForegroundColor("info", dusk::LogForegroundColor::LOG_FG_BLUE);
+    Logging::SetLevelForegroundColor("info", dusk::LogForegroundColor::LOG_FG_CYAN);
     Logging::SetLevelForegroundColor("debug", dusk::LogForegroundColor::LOG_FG_GREEN);
     Logging::SetLevelForegroundColor("perf", dusk::LogForegroundColor::LOG_FG_YELLOW);
 

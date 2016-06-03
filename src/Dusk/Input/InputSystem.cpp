@@ -190,12 +190,12 @@ InputSystem::Script_RegisterFunctions(void)
 {
     Scripting::RegisterFunction("dusk_get_input_system", &InputSystem::Script_Get);
     Scripting::RegisterFunction("dusk_input_system_map_key", &InputSystem::Script_MapKey);
-    Scripting::RegisterFunction(
-        "dusk_input_system_map_mouse_button", &InputSystem::Script_MapMouseButton);
-    Scripting::RegisterFunction(
-        "dusk_input_system_get_mapped_key", &InputSystem::Script_GetMappedKey);
-    Scripting::RegisterFunction(
-        "dusk_input_system_get_mapped_mouse_button", &InputSystem::Script_GetMappedMouseButton);
+    Scripting::RegisterFunction("dusk_input_system_map_mouse_button",
+        &InputSystem::Script_MapMouseButton);
+    Scripting::RegisterFunction("dusk_input_system_get_mapped_key",
+        &InputSystem::Script_GetMappedKey);
+    Scripting::RegisterFunction("dusk_input_system_get_mapped_mouse_button",
+        &InputSystem::Script_GetMappedMouseButton);
 }
 
 int
